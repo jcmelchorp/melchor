@@ -1,0 +1,33 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #leftSidenav class="sidenav" fixedInViewport [attr.role]="isHandset ? 'dialog' : 'navigation'"
+    [mode]="isHandset ? 'over' : 'side'" [opened]="isHandset === false">
+    <div role="navigation" fxLayout="column" fxLayoutAlign="space-between" fxFlexFill>
+      <mat-nav-list>
+        <app-brand-button></app-brand-button>
+        <h3 matSubheader>Shared Components </h3>
+        <mat-list-item [routerLink]="['404']" routerLinkActive="active">
+          <mat-icon matListIcon>do_not_step</mat-icon>
+          <span matLine>{{ "notfound" | translate }}</span>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['on-development']" routerLinkActive="active">
+          <mat-icon matListIcon>architecture</mat-icon>
+          <span matLine>{{ "comming-soon" | translate }} ...</span>
+        </mat-list-item>
+        <!--   -->
+      </mat-nav-list>
+
+      <mat-nav-list>
+        <mat-divider></mat-divider>
+        <mat-list-item mat-button [routerLink]="['settings']" routerLinkActive="active">
+          <mat-icon matListIcon>settings</mat-icon>
+          <span matLine>{{ "settings" | translate }}</span>
+        </mat-list-item>
+      </mat-nav-list>
+
+    </div>
+
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav-content">
+    <app-main-content></app-main-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

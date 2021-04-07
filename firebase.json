@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "site": "angular-material-11",
+    "public": "dist/angular-material-starter",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

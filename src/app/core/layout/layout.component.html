@@ -1,0 +1,9 @@
+<div [ngClass]="{'dark-theme': isDarkTheme|async}" fxLayout="column" fxFlexFill>
+  <app-header class="fix-top" [isHandset]="isHandset$|async"></app-header>
+  <div *ngIf="loading">
+    <mat-progress-bar mode="query" color="primary"> </mat-progress-bar>
+  </div>
+  <div fxFlex>
+    <app-sidenav [isHandset]="isHandset$|async"></app-sidenav>
+  </div>
+</div>

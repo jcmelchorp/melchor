@@ -1,0 +1,34 @@
+<mat-toolbar class="border-bottom">
+  <mat-toolbar-row fxLayout="row warp" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <fa-icon *ngIf="isHandset" mat-icon-button [icon]="faBars" (click)="toggleSidenavLeft($event)"
+        aria-label="Side nav toggle icon">
+      </fa-icon>
+      <app-brand-button class="ml-2"></app-brand-button>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <button type="button" aria-label="Alternar idioma" mat-icon-button [matMenuTriggerFor]="languageMenu">
+        <div fxLayout="column" fxLayoutAlign="end center">
+          <mat-icon>language</mat-icon>
+          <span style="margin-top: -15px;">{{ translate.currentLang }}</span>
+        </div>
+      </button>
+      <mat-menu #languageMenu="matMenu">
+        <div mat-menu-item (click)="switchLang('es')">
+          <mat-icon svgIcon="es" aria-hidden="false" aria-label="español flag icon"></mat-icon>
+          {{ "language-es-name" | translate }}
+        </div>
+        <div mat-menu-item (click)="switchLang('en')">
+          <mat-icon svgIcon="en" aria-hidden="false" aria-label="english flag icon"></mat-icon>
+          {{ "language-en-name" | translate }}
+        </div>
+      </mat-menu>
+      <button type="button" aria-label="Alternar tema" mat-icon-button (click)="toggleDarkTheme()">
+        <div fxLayout="column" fxLayoutAlign="end center">
+          <mat-icon>{{(isDarkTheme|async)?'nightlight':'light_mode'}}</mat-icon>
+          <span style="margin-top: -15px;">{{ (isDarkTheme|async)?'off':'on' }}</span>
+        </div>
+      </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

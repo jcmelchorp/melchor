@@ -1,0 +1,37 @@
+@import "~@angular/material/theming";
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&family=Roboto&family=Fredoka+One&family=Love+Ya+Like+A+Sister&family=Sarabun&family=Londrina+Shadow&family=Londrina+Sketch&family=Miltonian&family=Modak&display=swap");
+/* .active {
+  @include mat-elevation-transition;
+  @include mat-elevation(2);
+
+  &:active {
+    @include mat-elevation(18,#e91e63, 0.8);
+  }
+} */
+$custom-typography: mat-typography-config(
+  $font-family: "sarabun",
+);
+@include mat-core($custom-typography);
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+$light-primary: mat-palette($mat-blue);
+$light-accent: mat-palette($mat-brown, A200, A400, A900);
+// The warn palette is optional (defaults to red).
+$light-warn: mat-palette($mat-deep-orange);
+// Create the theme object (a Sass map containing all of the palettes).
+$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($light-theme);
+// Define an alternate dark theme.
+.dark-theme {
+  color: $light-primary-text;
+  $dark-primary: mat-palette($mat-blue-grey);
+  $dark-accent: mat-palette($mat-gray, A400, A100, A700);
+  $dark-warn: mat-palette($mat-red);
+  $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+  @include angular-material-theme($dark-theme);
+}
