@@ -1720,7 +1720,7 @@
   "resolved" "https://registry.npmjs.org/@protobufjs/utf8/-/utf8-1.1.0.tgz"
   "version" "1.1.0"
 
-"@schematics/angular@11.2.7":
+"@schematics/angular@^11.2.7", "@schematics/angular@11.2.7":
   "integrity" "sha512-LI6FkFHmwS/MCt+QENpGT/xl1Y6RMvcDqQ/efbZ3qz2W+0W0DkaPSlDmVbbNzgol+eJ7eHx4kmJr2U2r9ZOQgg=="
   "resolved" "https://registry.npmjs.org/@schematics/angular/-/angular-11.2.7.tgz"
   "version" "11.2.7"

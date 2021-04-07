@@ -5,13 +5,9 @@
       <mat-nav-list>
         <app-brand-button></app-brand-button>
         <h3 matSubheader>Shared Components </h3>
-        <mat-list-item [routerLink]="['404']" routerLinkActive="active">
+        <mat-list-item [routerLink]="['fb-leak']" routerLinkActive="active">
           <mat-icon matListIcon>do_not_step</mat-icon>
           <span matLine>{{ "notfound" | translate }}</span>
-        </mat-list-item>
-        <mat-list-item [routerLink]="['on-development']" routerLinkActive="active">
-          <mat-icon matListIcon>architecture</mat-icon>
-          <span matLine>{{ "comming-soon" | translate }} ...</span>
         </mat-list-item>
         <!--   -->
       </mat-nav-list>
