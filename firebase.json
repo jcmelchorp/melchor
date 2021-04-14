@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "site": "angular-material-11",
-    "public": "dist/angular-material-starter",
+    "site": "melchor",
+    "public": "dist/melchor",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {

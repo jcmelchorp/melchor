@@ -1,0 +1,56 @@
+<mat-form-field appearance="outline">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input>
+</mat-form-field>
+<div>
+  <table mat-table [dataSource]="dataSource" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row"><img class="img-table-list"
+          src="https://static.coincap.io/assets/icons/256/{{row.symbol.toLowerCase()}}.png">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    </ng-container>
+    <!-- Rank Column -->
+    <ng-container matColumnDef="rank">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rank</th>
+      <td mat-cell *matCellDef="let row">{{row.rank}}</td>
+    </ng-container>
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Symbol</th>
+      <td mat-cell *matCellDef="let row">{{row.symbol}}</td>
+    </ng-container>
+    <!-- Supply Column -->
+    <ng-container matColumnDef="supply">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Supply</th>
+      <td mat-cell *matCellDef="let row">{{row.supply}}</td>
+    </ng-container>
+    <!-- MaxSupply Column -->
+    <ng-container matColumnDef="maxSupply">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Max Supply</th>
+      <td mat-cell *matCellDef="let row">{{row.maxSupply}}</td>
+    </ng-container>
+    <!-- PriceUsd Column -->
+    <ng-container matColumnDef="priceUsd">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Price (US$)</th>
+      <td mat-cell *matCellDef="let row">{{row.priceUsd}}</td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div>

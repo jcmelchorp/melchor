@@ -1,0 +1,20 @@
+<div class="mx-5 my-5">
+  <div style="margin-top: 20px">
+    <mat-card>
+      <mat-card-header style="margin-top: -20px">
+        <mat-card-title><span class="view-title">CryptoTrader</span>
+        </mat-card-title>
+        <mat-card-subtitle style="margin-top: 10px" class="view-subtitle"></mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>
+<div class="mat-spinner" *ngIf="(loading$|async)" fxLayout="column" fxLayoutAlign="center center">
+  <mat-spinner strokeWidth="10" [diameter]="90" title="Buscando">
+  </mat-spinner>
+  <!-- <span>Buscando ...</span><br> -->
+</div>
+<div class="mx-3">
+  <!-- <app-coins-table *ngIf="!(loading$|async)" [dataInput]="coins"></app-coins-table> -->
+  <app-crypto-list *ngIf="!(loading$|async)" [cryptos]="coins"></app-crypto-list>
+</div>

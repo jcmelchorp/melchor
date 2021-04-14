@@ -7,6 +7,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { ChartsModule } from 'ng2-charts';
+
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     SharedModule.forRoot(),
     CoreModule,
+    ChartsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

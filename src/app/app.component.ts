@@ -22,8 +22,8 @@ export class AppComponent {
     seoService.titleInit();
     seoService.generateTags({
       title: this.title,
-      description: 'Angular Material 11 template with Bootstrap 4.6 for responsive and progressive webapp, including i18n translations, Font Awesome icons, Angular Firebase, Angular Flex-layout, custom and dark theme, Google Fonts',
-      image: 'assets/screenshots/screenshot02.png'
+      description: 'Personal site',
+      image: ''
     });
   }
 

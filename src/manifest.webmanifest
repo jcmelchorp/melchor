@@ -1,7 +1,7 @@
 {
-  "name": "Angular Material Starter",
-  "short_name": "Angular Material Starter",
-  "description": "Angular Material 11 template with Bootstrap 4.6 for responsive and progressive webapp, including i18n translations, Font Awesome icons, Angular Firebase, Angular Flex-layout, custom and dark theme, Google Fonts",
+  "name": "Melchor",
+  "short_name": "Melchor",
+  "description": "Personal Web site",
   "theme_color": "#0060a0",
   "background_color": "#ffffff",
   "display": "standalone",
