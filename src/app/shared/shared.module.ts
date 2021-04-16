@@ -1,20 +1,26 @@
 import { RouterModule } from '@angular/router';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
+
+import { ChartsModule } from 'ng2-charts';
 
 import { appearanceModules } from '../material';
 
 import { sharedComponents } from './components';
 import { sharedServices } from './services';
 
-import { DummyTextComponent } from './components/dummy-text/dummy-text.component';
 import { BrandButtonComponent } from './components/brand-button/brand-button.component';
+import { DummyTextComponent } from './components/dummy-text/dummy-text.component';
 export const sharedModules: any[] = [
   CommonModule,
   RouterModule,
   TranslateModule,
+  FormsModule,
+  ReactiveFormsModule,
+  ChartsModule,
 ];
 @NgModule({
   imports: [
@@ -25,7 +31,7 @@ export const sharedModules: any[] = [
     ...sharedModules,
     ...sharedComponents,
   ],
-  declarations: [...sharedComponents, BrandButtonComponent],
+  declarations: [...sharedComponents],
   providers: [...sharedServices]
 })
 export class SharedModule {

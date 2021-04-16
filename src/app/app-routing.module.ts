@@ -8,13 +8,14 @@ import { NotFoundComponent } from './shared/components';
 import { SettingsComponent } from './core/components/settings/settings.component';
 
 const routes: Routes = [{
-  path: '', component: LayoutComponent, children: [
+  path: '', component: LayoutComponent, data: { breadcrumb: 'Home' },
+  children: [
     { path: '', component: WellcomeComponent, data: { title: 'Wellcome Page' } },
     { path: 'on-development', component: UnderConstructionComponent, data: { title: 'Under Development Page' } },
     { path: '404', component: NotFoundComponent, data: { title: 'Page Not Found' } },
     { path: 'settings', component: SettingsComponent, data: { title: 'Settings' } },
-    { path: 'coincap', loadChildren: () => import('./coincap/coincap.module').then(m => m.CoincapModule) }
-  ]
+    { path: 'crypto', loadChildren: () => import('./cryptocurrency/cryptocurrency.module').then(m => m.CryptocurrencyModule), data: { breadcrumb: null } },
+  ],
 }];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

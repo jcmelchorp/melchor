@@ -1,0 +1,29 @@
+<div class="mat-spinner" *ngIf="(loading$|async) && !(chart|async)" fxLayout="column" fxLayoutAlign="center center">
+  <mat-spinner strokeWidth="18" [diameter]="120" title="Buscando">
+  </mat-spinner>
+  <span>Buscando ...</span><br>
+</div>
+<div *ngIf="!(loading$|async) && (chart|async) && (coin$|async) as coin">
+  <div class="card bg-transparent">
+    <h4 class="card-header ">
+      <div fxLayout="row" fxLayoutAlign="start space-around">
+        <div class="mr-2">
+          <img class="img-table-list"
+            src="https://static.coincap.io/assets/icons/256/{{coin.symbol.toLowerCase()}}.png">
+        </div>
+        <div fxLayout="column">
+          <span>{{coin.name}}
+            <small class="{{(coin.changePercent24Hr>0?'text-success':'text-danger')}}">
+              {{coin.changePercent24Hr|number}}%
+            </small>
+          </span>
+          <span class="text-primary">US{{coin.priceUsd | currency}} </span>
+        </div>
+      </div>
+    </h4>
+    <div class="card-body" *ngIf="!(loading$|async) && (chart|async) as chart">
+      <app-coin-chart [dataPoint]="chart.dataPoint" [dataLabels]="chart.dataLabels"></app-coin-chart>
+    </div>
+  </div>
+
+</div>

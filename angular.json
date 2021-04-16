@@ -20,6 +20,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "chart.js",
+              "chartjs-plugin-annotation"
+            ],
             "outputPath": "dist/melchor",
             "index": "src/index.html",
             "main": "src/main.ts",

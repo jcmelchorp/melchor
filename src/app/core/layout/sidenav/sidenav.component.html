@@ -5,13 +5,9 @@
       <mat-nav-list>
         <app-brand-button></app-brand-button>
         <h3 matSubheader>Shared Components </h3>
-        <mat-list-item [routerLink]="['fb-leak']" routerLinkActive="active">
-          <mat-icon matListIcon>do_not_step</mat-icon>
-          <span matLine>{{ "notfound" | translate }}</span>
-        </mat-list-item>
-        <mat-list-item [routerLink]="['coincap']" routerLinkActive="active">
+        <mat-list-item [routerLink]="['crypto']" routerLinkActive="active">
           <mat-icon matListIcon>coin</mat-icon>
-          <span matLine>CoinCap</span>
+          <span matLine>Cryptocurrencies</span>
         </mat-list-item>
         <!--   -->
       </mat-nav-list>
@@ -28,6 +24,11 @@
 
   </mat-sidenav>
   <mat-sidenav-content class="sidenav-content">
-    <app-main-content></app-main-content>
+    <app-main-content>
+      <!--       <div *ngIf="isOnline" style="width: 100%; height: 30px;"> -->
+      <div style="width: 100%; height: 30px;">
+        <app-breadcrumb></app-breadcrumb>
+      </div>
+    </app-main-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

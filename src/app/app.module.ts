@@ -17,6 +17,7 @@ import { appearanceModules } from './material';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { AppStoreModule } from './store/app-store.module';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -28,6 +29,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AppStoreModule,
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule.forRoot(),

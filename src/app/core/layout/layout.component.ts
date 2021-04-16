@@ -1,12 +1,8 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Router } from '@angular/router';
 
-import { TranslateService } from '@ngx-translate/core';
-
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
 
 import { LayoutService } from '../services/layout.service';
 import { ThemeService } from '../services/theme.service';

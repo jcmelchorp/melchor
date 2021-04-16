@@ -1,0 +1,60 @@
+<div class="mat-spinner" *ngIf="(loading$|async)" fxLayout="column" fxLayoutAlign="center center">
+  <mat-spinner strokeWidth="10" [diameter]="90" title="Buscando">
+  </mat-spinner>
+  <span>Buscando ...</span><br>
+</div>
+<div *ngIf="!(loading$|async) && (coins$|async)">
+  <table mat-table *ngIf="dataSource" matSort aria-label="Elements">
+    <!-- Rank Column -->
+    <ng-container matColumnDef="rank">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rank</th>
+      <td mat-cell *matCellDef="let row">{{row.rank}}</td>
+    </ng-container>
+    <!-- Id Column -->
+    <!--  <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container> -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">
+        <div fxLayout="row">
+          <img class="mr-2 img-table-list"
+            src="https://static.coincap.io/assets/icons/256/{{row.symbol.toLowerCase()}}.png">{{row.name}}
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Symbol</th>
+      <td mat-cell *matCellDef="let row">{{row.symbol}}</td>
+    </ng-container>
+    <!-- Supply Column -->
+    <ng-container matColumnDef="supply">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Supply</th>
+      <td mat-cell *matCellDef="let row">{{row.supply}}</td>
+    </ng-container>
+    <!-- MaxSupply Column -->
+    <ng-container matColumnDef="maxSupply">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Max Supply</th>
+      <td mat-cell *matCellDef="let row">{{row.maxSupply}}</td>
+    </ng-container>
+    <!-- PriceUsd Column -->
+    <ng-container matColumnDef="priceUsd">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Price (US$)</th>
+      <td mat-cell *matCellDef="let row">{{row.priceUsd}}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="[row.id]"></tr>
+    <!-- Row shown when there is no matching data. -->
+    <tr mat-row class="mat-row" *matNoDataRow>
+      <td mat-cel class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+  <mat-paginator #paginator [length]="dataSource?.data?.length" [pageIndex]="0" [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>
+</div>
