@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
+import { faCommentDollar } from '@fortawesome/free-solid-svg-icons';
+
 import { filter, distinctUntilChanged } from 'rxjs/operators';
 
 import { IBreadCrumb } from '../../models/breadcrumb.model';
@@ -12,7 +14,6 @@ import { IBreadCrumb } from '../../models/breadcrumb.model';
 })
 export class BreadcrumbComponent implements OnInit {
   public breadcrumbs: IBreadCrumb[]
-
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,

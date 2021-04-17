@@ -22,7 +22,8 @@
           "options": {
             "allowedCommonJsDependencies": [
               "chart.js",
-              "chartjs-plugin-annotation"
+              "chartjs-plugin-annotation",
+              "chartjs-plugin-datalabels"
             ],
             "outputPath": "dist/melchor",
             "index": "src/index.html",
@@ -40,7 +41,7 @@
               "./node_modules/bootstrap/scss/bootstrap.scss",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/chart.js/dist/Chart.min.js"]
           },
           "configurations": {
             "production": {

@@ -1,4 +1,4 @@
-table {
+.mat-table {
   width: 100%;
 }
 
@@ -9,4 +9,15 @@ table {
 .mat-form-field {
   font-size: 14px;
   width: 100%;
+}
+
+mat-header-row,
+mat-row {
+  min-height: 40px;
+  max-height: 80px;
+}
+.mat-column-rank,
+.mat-column-select {
+  flex: none;
+  width: 50px;
 }

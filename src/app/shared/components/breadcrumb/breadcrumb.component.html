@@ -1,7 +1,11 @@
-<ol class="breadcrumb">
-  <li *ngFor="let breadcrumb of breadcrumbs">
-    <span [routerLink]="breadcrumb.url" routerLinkActive="active">
-      {{ breadcrumb.label }}
+<div class="breadcrumb bg-transparent">
+  <div class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs" [routerLink]="breadcrumb.url"
+    routerLinkActive="active">
+    <span *ngIf="breadcrumb.label=='Home';else textBreadcrumb">
+      <mat-icon>home</mat-icon>
     </span>
-  </li>
-</ol>
+    <ng-template #textBreadcrumb>
+      <span>{{ breadcrumb.label }} </span>
+    </ng-template>
+  </div>
+</div>

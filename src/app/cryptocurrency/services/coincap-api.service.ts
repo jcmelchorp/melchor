@@ -20,7 +20,7 @@ export class CoincapApiService {
         retry(3),
         map(coins => coins.body['data']),
         catchError(this.handleError),
-        //tap(res => console.log(res))
+        // tap(res => console.log(res))
       );
   }
 
@@ -36,8 +36,8 @@ export class CoincapApiService {
       retry(3),
       map(coins => coins.body['data']),
       catchError(this.handleError),
-/*       tap(res => console.log(res))
- */    );
+      /* tap(res => console.log(res)) */
+    );
   }
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';

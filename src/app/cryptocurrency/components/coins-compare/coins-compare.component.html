@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayoutAlign="space-between top">
+  <h2 mat-dialog-title>Comparación múltiple</h2>
+  <fa-icon mat-icon-button [icon]="faTimes" size="lg" (click)="onClose()" matDialogClose></fa-icon>
+</div>
+<mat-dialog-content>
+  <ng-template #spinner>
+    <div class="mat-spinner" *ngIf="(loading$|async)" fxLayout="column" fxLayoutAlign="center center">
+      <mat-spinner strokeWidth="10" [diameter]="75">
+      </mat-spinner>
+      <span>Buscando ...</span><br>
+    </div>
+  </ng-template>
+  <app-coin-mult-chart *ngIf="!(loading$|async);else spinner" [lineChartData]="dataPoints"
+    [lineChartLabels]="dataLabels">
+  </app-coin-mult-chart>
+</mat-dialog-content>

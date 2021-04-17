@@ -12,8 +12,6 @@ import { appearanceModules } from '../material';
 import { sharedComponents } from './components';
 import { sharedServices } from './services';
 
-import { BrandButtonComponent } from './components/brand-button/brand-button.component';
-import { DummyTextComponent } from './components/dummy-text/dummy-text.component';
 export const sharedModules: any[] = [
   CommonModule,
   RouterModule,

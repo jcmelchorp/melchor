@@ -1,17 +1,16 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #leftSidenav class="sidenav" fixedInViewport [attr.role]="isHandset ? 'dialog' : 'navigation'"
+  <mat-sidenav #leftSidenav class="sidenav" fixedInViewport="true" [attr.role]="isHandset ? 'dialog' : 'navigation'"
     [mode]="isHandset ? 'over' : 'side'" [opened]="isHandset === false">
     <div role="navigation" fxLayout="column" fxLayoutAlign="space-between" fxFlexFill>
       <mat-nav-list>
         <app-brand-button></app-brand-button>
         <h3 matSubheader>Shared Components </h3>
         <mat-list-item [routerLink]="['crypto']" routerLinkActive="active">
-          <mat-icon matListIcon>coin</mat-icon>
+          <fa-icon matListIcon [icon]="faCommentsDollar"></fa-icon>
           <span matLine>Cryptocurrencies</span>
         </mat-list-item>
         <!--   -->
       </mat-nav-list>
-
       <mat-nav-list>
         <mat-divider></mat-divider>
         <mat-list-item mat-button [routerLink]="['settings']" routerLinkActive="active">
@@ -19,16 +18,12 @@
           <span matLine>{{ "settings" | translate }}</span>
         </mat-list-item>
       </mat-nav-list>
-
     </div>
 
   </mat-sidenav>
   <mat-sidenav-content class="sidenav-content">
     <app-main-content>
-      <!--       <div *ngIf="isOnline" style="width: 100%; height: 30px;"> -->
-      <div style="width: 100%; height: 30px;">
-        <app-breadcrumb></app-breadcrumb>
-      </div>
+      <app-breadcrumb></app-breadcrumb>
     </app-main-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
