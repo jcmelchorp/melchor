@@ -27,8 +27,8 @@
   <div>
     <button mat-raised-button color="primary" (click)="clearFilter()">Clear Filter</button>
   </div>
-  <div>
-    <button mat-raised-button color="warn" (click)="compareMany(selection)"
+  <div class="d-block">
+    <button class="float-start" mat-raised-button color="warn" (click)="compareMany(selection)"
       [hidden]="selection.selected.length<2">Compare ({{selection.selected.length|json}})</button>
   </div>
   <mat-table *ngIf="dataSource" matSort aria-label="Elements">
@@ -69,30 +69,30 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header>Precio</mat-header-cell>
       <mat-cell *matCellDef="let row">US{{row.priceUsd|currency}}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="marketCapUsd">
+    <!-- <ng-container matColumnDef="marketCapUsd">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Capital de mercado</mat-header-cell>
       <mat-cell *matCellDef="let row">US{{row.marketCapUsd|currency}}</mat-cell>
-    </ng-container>
+    </ng-container> -->
     <!-- Symbol Column -->
     <!--  <ng-container matColumnDef="symbol">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Symbol</mat-header-cell>
       < mat-cell *matCellDef="let row">{{row.symbol}}</>
     </ng-container> -->
     <!-- Supply Column -->
-    <ng-container matColumnDef="supply">
+    <!-- <ng-container matColumnDef="supply">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Supply</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.supply|currency}}</mat-cell>
-    </ng-container>
+    </ng-container> -->
     <!-- MaxSupply Column -->
-    <ng-container matColumnDef="maxSupply">
+    <!--  <ng-container matColumnDef="maxSupply">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Max Supply</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.maxSupply|currency}}</mat-cell>
-    </ng-container>
+    </ng-container>-->
     <ng-container matColumnDef="vwap24Hr">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Volumen del mercado</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.vwap24Hr|currency}}</mat-cell>
     </ng-container>
-    <!-- MaxSupply Column -->
+    <!-- Variación Column -->
     <ng-container matColumnDef="changePercent24Hr">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Variación</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.changePercent24Hr|number}}%</mat-cell>

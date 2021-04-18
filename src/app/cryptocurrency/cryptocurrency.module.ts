@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { EntityDefinitionService, EntityServices, EntityDataService } from '@ngrx/data';
 
@@ -36,13 +37,13 @@ import { CryptocurrencyComponent } from './containers/cryptocurrency/cryptocurre
   imports: [
     SharedModule,
     CryptocurrencyRoutingModule,
-    ...appearanceModules,
   ],
   providers: [
     CoincapApiService,
     CoinsResolver,
     CoinsEntityService,
     CoinsDataService,
+    { provide: MAT_DATE_LOCALE, useValue: 'es-MX' },
   ]
 })
 export class CryptocurrencyModule {

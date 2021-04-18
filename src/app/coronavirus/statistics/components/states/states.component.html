@@ -1,0 +1,29 @@
+<div class="px-5 pt-2" [class.mat-elevation-z4]="false">
+  <div class="breadcrumb" fxLayout="row" fxLayoutAlign="center">
+    <div class="text-center">
+      <p class="display-4 d-none d-sm-block">Datos por estados</p>
+      <p class="mat-h1 d-none d-sm-block">
+        <small class="text-muted">Evoluci&oacute;n de la pandemia desde el comienzo.</small>
+      </p>
+      <p class="d-block d-sm-none" [ngStyle]="{ fontSize: '32px' }">
+        Datos por estados
+      </p>
+      <p class="mat-h3 d-block d-sm-none">
+        <small class="text-muted">Evoluci&oacute;n de la pandemia desde el comienzo.</small>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="px-2 pb-3">
+  <mat-card [class.mat-elevation-z6]="true" class="my-2" fxFlex="100%">
+    <mat-card-header>
+      <mat-card-title>Nuevos casos por día</mat-card-title>
+      <mat-card-subtitle>El numero de casos que se registaron por día.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <canvas baseChart [datasets]="newData" [labels]="lineChartLabels" [options]="{ responsive: true }" [legend]="true"
+        [chartType]="'line'" [plugins]="[]">
+      </canvas>
+    </mat-card-content>
+  </mat-card>
+</div>

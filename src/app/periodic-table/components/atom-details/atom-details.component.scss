@@ -1,0 +1,66 @@
+@import "./../../../../assets/theme/variables";
+
+$default-font-size: calc(0.4rem + 1vw);
+$phase-font-size: calc(1.2rem + 3vw);
+$shell-font-size: calc(0.3rem + 0.6vw);
+$name-font-size: calc(0.6rem + 1vw);
+
+.author {
+  font-size: $shell-font-size;
+  max-width: 100px;
+}
+.number {
+  font-size: $default-font-size;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 2px black;
+}
+.name {
+  font-size: $name-font-size;
+  color: rgb(231, 231, 231);
+  text-shadow: 1px 1px 2px black;
+  margin-top: 15%;
+}
+.symbol {
+  font-family: "Fredoka One", cursive;
+  text-shadow: 3px 3px 2px rgb(255, 255, 255);
+  font-size: $phase-font-size;
+  margin-top: 10%;
+}
+.mass {
+  font-size: $shell-font-size;
+  margin-top: 0%;
+}
+.elect-config {
+  font-size: $default-font-size;
+  font-weight: 400;
+}
+.temp {
+  margin-top: -5%;
+  font-size: $shell-font-size;
+}
+.atom {
+  &-container {
+    height: 100%;
+    border-radius: 10px;
+    padding: 5px;
+    .gas {
+      color: $gas-color;
+      font-size: $phase-font-size;
+    }
+
+    .solid {
+      color: $solid-color;
+      font-size: $phase-font-size;
+    }
+
+    .unknown {
+      color: $unknown-color;
+      font-size: $phase-font-size;
+    }
+
+    .liquid {
+      color: $liquid-color;
+      font-size: $phase-font-size;
+    }
+  }
+}

@@ -12,6 +12,8 @@ import { appearanceModules } from '../material';
 import { sharedComponents } from './components';
 import { sharedServices } from './services';
 
+import { AlertComponent } from './components/alert/alert.component';
+
 export const sharedModules: any[] = [
   CommonModule,
   RouterModule,
@@ -28,6 +30,7 @@ export const sharedModules: any[] = [
   exports: [
     ...sharedModules,
     ...sharedComponents,
+    ...appearanceModules,
   ],
   declarations: [...sharedComponents],
   providers: [...sharedServices]

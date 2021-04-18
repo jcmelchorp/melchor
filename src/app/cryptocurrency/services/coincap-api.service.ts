@@ -24,12 +24,12 @@ export class CoincapApiService {
       );
   }
 
-  getHistory(id: string) {
+  getHistory(id: string, interval: string, start?: number, end?: number) {
     return this.http.get<CoinHistoryData[]>(`${this.ROOT_URL}/${id}/history`, {
       observe: 'response',
       params: new HttpParams(
         {
-          fromString: 'interval=d1'
+          fromString: `interval=${interval}&${(start && end) ? `start=${start}&end=${end}` : ''}`
         }
       )
     }).pipe(

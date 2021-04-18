@@ -23,7 +23,8 @@
             "allowedCommonJsDependencies": [
               "chart.js",
               "chartjs-plugin-annotation",
-              "chartjs-plugin-datalabels"
+              "chartjs-plugin-datalabels",
+              "atom-structure"
             ],
             "outputPath": "dist/melchor",
             "index": "src/index.html",
@@ -39,9 +40,14 @@
             "styles": [
               "src/styles.scss",
               "./node_modules/bootstrap/scss/bootstrap.scss",
-              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/katex/dist/katex.css",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": ["node_modules/chart.js/dist/Chart.min.js"]
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.min.js",
+              "src/assets/script/atom-structure.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -73,13 +79,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "4mb",
                   "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "10kb",
+                  "maximumError": "15kb"
                 }
               ],
               "serviceWorker": true,
@@ -119,9 +125,14 @@
             "styles": [
               "src/styles.scss",
               "./node_modules/bootstrap/scss/bootstrap.scss",
-              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "./node_modules/katex/dist/katex.css",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.min.js",
+              "src/assets/script/atom-structure.js"
+            ]
           }
         },
         "lint": {

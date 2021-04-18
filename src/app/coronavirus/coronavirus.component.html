@@ -1,0 +1,50 @@
+<div class="jumbotron text-center">
+  <fa-icon [icon]="faVirus" size="3x" aria-hidden="false" aria-label="covid icon"></fa-icon>
+  <div class="display-4 module-name"> {{ "coronavirus-name" | translate }}</div>
+  <p class="mat-h1"> {{ "coronavirus-description" | translate }} </p>
+</div>
+<mat-nav-list fxLayout="row">
+  <mat-list-item role="navigation" [routerLink]="['statistics/current']">
+    {{ "statistics-module-name" | translate }}
+  </mat-list-item>
+  <mat-list-item role="navigation" [routerLink]="['information/menu']">
+    {{ "information-module-name" | translate }}
+  </mat-list-item>
+</mat-nav-list>
+
+<carousel [interval]="2000">
+  <slide>
+    <div class="text-center py-5 bg-dark text-white">
+      <h2>Gráficas</h2>
+      <div class="lead">
+        <h3>
+          Análisis y monitoreo de las cifras de contagio
+        </h3>
+        <p>
+          Datos locales, nacionales e internacionales
+        </p>
+      </div>
+    </div>
+  </slide>
+  <slide>
+    <div class="text-center py-5 bg-dark text-white">
+      <h2>Aspectos de impacto</h2>
+      <div class="lead">
+        <h3>Las diversas áreas de la vida donde afecta la pandemia</h3>
+        <p>Salud, familia, trabajo, escuela, recreación, economía, política</p>
+      </div>
+    </div>
+  </slide>
+  <slide>
+    <div class="text-center py-5 bg-dark text-white">
+      <h2>Modelos epidemiológicos</h2>
+      <div class="lead">
+        <h3>Modelo SIR</h3>
+        <p>
+          Herramienta interactiva básica para entender la evolución de la
+          pandemia
+        </p>
+      </div>
+    </div>
+  </slide>
+</carousel>

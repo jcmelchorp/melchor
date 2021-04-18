@@ -1,0 +1,103 @@
+<mat-toolbar>
+  <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    (click)="sidenavtwo.toggle()"
+    [ngClass]="{ hidden: !deviceSm }"
+  >
+    <fa-icon
+      aria-label="Side nav toggle icon"
+      [icon]="menu"
+      size="lg"
+    ></fa-icon>
+  </button>
+  <span>Información</span>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenavtwo
+    [opened]="!deviceSm"
+    role="navigation"
+    [mode]="!deviceSm ? 'side' : 'over'"
+  >
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['menu']">Información general</a>
+      <a mat-list-item [routerLink]="['covid-risk']">Riesgo laboral</a>
+      <a mat-list-item [routerLink]="['return-to-normal']"
+        >La nueva normalidad</a
+      >
+      <a mat-list-item [routerLink]="['infographics']">Infografías</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<!-- <div *ngIf="isModalShown" config="{ show: true }" (onHidden)="onHidden()" bsModal autoShownModal="bs-modal"
+  class="modal fade d-block" tabindex="-1" role="dialog" aria-labelledby="dialog-auto-name">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center pt-4">
+        <div *ngIf="modalStep == 1" class="modal-step" [@fadeInOutAnimation]>
+          <img src="assets/images/step-1.png" width="125">
+          <h5 class="text-white mt-3">Conoce c&oacute;mo se <span class="text-blue">dispersa</span> el virus</h5>
+          <h6 class="text-white">Actualmente, no existe vacuna para prevenir el contagio de <span
+              class="text-danger">COVID-19</span>
+          </h6>
+          <p>El virus se contagia principalmente con el contacto de persona a persona, cuando las diminutas gotas que
+            provienen de la tos o el estornudo de una persona infectada son expulsadas al exterior.</p>
+        </div>
+        <div *ngIf="modalStep == 2" class="modal-step" [@fadeInOutAnimation]>
+          <img src="assets/images/step-2.png" width="125">
+          <h5 class="text-white mt-3">Medidas para <span class="text-blue">PROTEJERTE</span> a ti mismo</h5>
+          <p>L&aacute;vate las manos con agua y jab&oacute;n durante 20 segundos. Evita tocarte la cara, en especial los
+            ojos, nar&iacute;z y boca. Recuerda que &eacute;sta es la v&iacute;a de entrada del virus.</p>
+        </div>
+        <div *ngIf="modalStep == 3" class="modal-step" [@fadeInOutAnimation]>
+          <img src="assets/images/step-3.png" width="125">
+          <h5 class="text-white mt-3">Evita el contacto <span class="text-blue">CERCANO</span> con las personas.</h5>
+          <p>Has caso de las medidas de distanciamiento social de tu comunidad. Recuerda que esto es fundamental para
+            acabar con esta pandemia.</p>
+
+        </div>
+        <div *ngIf="modalStep == 4" class="modal-step" [@fadeInOutAnimation]>
+          <img src="assets/images/step-4.png" width="125">
+          <h5 class="text-white mt-3">Toma medidas para <span class="text-blue">PROTEGERTE</span> a ti mismo</h5>
+          <p>
+            Cu&uacute;rete con un pañuelo nar&iacute;z y boca cuando estornudes o tosas, o con el interior de tu
+            antebrazo.
+            L&aacute;vate las manos inmediatamente con agua y con jab&oacute;n al menos durante 20 segundos, o aplica en
+            tus manos gel sanitizante con cuando menos 70% de alcohol.
+          </p>
+        </div>
+        <div *ngIf="modalStep == 5" class="modal-step" [@fadeInOutAnimation]>
+          <img src="assets/images/step-5.png" width="125">
+          <h5 class="text-white mt-3">LAVA Y <span class="text-blue">DESINFECTA</span></h5>
+          <p>
+            Lava y desinfecta las superficies con las que regularmente tienes contacto. &Eacute;sto incluye mesas,
+            perillas de puertas, interruptores de luz,
+            manijas, escritorios, tel&eacute;fonos, teclados, inodoros, lavamanos, etc.
+            Si ves una superficie sucia, l&iacute;mpiala: Usa detergente o jab&oacute;n apropiado para la
+            desinfecci&oacute;n.
+          </p>
+        </div>
+        <div class="col-12 text-center" *ngIf="modalStep!=5">
+          <button (click)="nextStep()" class="btn btn-secondary waves-effect waves-light mb-4"><span>Siguiente
+            </span><i class="fa fa-arrow-right mr-1"></i></button>
+        </div>
+        <div class="col-12 text-center" *ngIf="modalStep==5">
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="forDontShow" #dontShow>
+              <label class="custom-control-label" for="forDontShow">No quiero ver esto de nuevo</label>
+            </div>
+          </div>
+          <button (click)="close(dontShow.checked)" class="btn btn-blue waves-effect waves-light mb-4"><i
+              class="fas fa-times-circle mr-1"></i><span>Cerrar</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ -->

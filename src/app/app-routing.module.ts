@@ -14,9 +14,13 @@ const routes: Routes = [{
     { path: 'on-development', component: UnderConstructionComponent, data: { title: 'Under Development Page' } },
     { path: '404', component: NotFoundComponent, data: { title: 'Page Not Found' } },
     { path: 'settings', component: SettingsComponent, data: { title: 'Settings' } },
-    { path: 'crypto', loadChildren: () => import('./cryptocurrency/cryptocurrency.module').then(m => m.CryptocurrencyModule), data: { breadcrumb: null } },
+    { path: 'crypto', loadChildren: () => import('./cryptocurrency/cryptocurrency.module').then(m => m.CryptocurrencyModule), data: { breadcrumb: null, title: 'Cryptocurrency' } },
+    { path: 'periodic-table', loadChildren: () => import('./periodic-table/periodic-table.module').then(m => m.PeriodicTableModule), data: { breadcrumb: null, title: 'Periodic Table' } },
+    { path: 'coronavirus', loadChildren: () => import('./coronavirus/coronavirus.module').then(m => m.CoronavirusModule), data: { breadcrumb: null, title: 'Coronavirus' } },
   ],
-}];
+},
+
+];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

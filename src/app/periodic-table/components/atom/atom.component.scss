@@ -1,0 +1,104 @@
+@import "./../../../../assets/theme/variables";
+
+$selected-color: #fff;
+
+.atom-container {
+  /* display: flex;
+    flex-direction: column; */
+  cursor: pointer;
+  height: 100%;
+  padding-left: 2px;
+  padding-top: 0px;
+  border-radius: 5px;
+  p {
+    margin: 0;
+    padding: 0;
+
+    &.atomic {
+      font-size: calc(0.04rem + 0.7vw);
+      margin-top: -5px;
+      //position: absolute;
+    }
+
+    &.symbol {
+      font-family: "Fredoka One", cursive;
+      text-shadow: 1px 1px 2px rgb(255, 255, 255);
+      font-size: calc(0.3rem + 1.5vw);
+      //position: absolute;
+      //margin-top: -10px;
+    }
+
+    &.name {
+      font-family: "Ubuntu Condensed", sans-serif;
+      font-size: calc(0.08rem + 0.8vw);
+      margin-left: -2px;
+      margin-bottom: 10px;
+    }
+    &.weight {
+      font-size: calc(0.03rem + 0.6vw);
+      align-self: flex-end;
+      //position: relative;
+      margin-top: 0px;
+      margin-left: 20px;
+    }
+  }
+
+  &.blurry {
+    opacity: 0.5;
+  }
+
+  .gas {
+    color: $gas-color;
+    font-size: calc(0.4rem + 1.2vw);
+  }
+
+  .liquid {
+    color: $liquid-color;
+  }
+
+  .solid {
+    color: $solid-color;
+  }
+
+  .unknown {
+    color: $unknown-color;
+  }
+
+  &.solid-selected,
+  &.liquid-selected,
+  &.gas-selected,
+  &.unknown-selected {
+    color: $selected-color;
+    border-radius: 5px;
+  }
+
+  &.solid-selected {
+    background: $solid-background-color;
+    text-shadow: 1px 1px 2px rgb(87, 87, 87);
+    border-radius: 5px;
+  }
+
+  &.liquid-selected {
+    background: $liquid-background-color;
+    text-shadow: 1px 1px 2px rgb(0, 30, 87);
+    border-radius: 5px;
+  }
+
+  &.gas-selected {
+    background: $gas-background-color;
+    text-shadow: 1px 1px 2px rgb(53, 0, 0);
+    border-radius: 5px;
+  }
+
+  &.unknown-selected {
+    background: $unknown-background-color;
+    text-shadow: 1px 1px 2px rgb(49, 34, 0);
+    border-radius: 5px;
+  }
+
+  &.grayout {
+    background: inherit;
+    text-shadow: 1px 1px 2px rgb(51, 51, 51);
+    border-radius: 5px;
+  }
+}

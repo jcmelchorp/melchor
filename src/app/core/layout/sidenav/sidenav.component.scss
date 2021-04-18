@@ -1,6 +1,5 @@
 @import "./../../../../assets/theme/colors";
 .sidenav {
-  //height: inherit;
   width: fit-content;
   border: none;
   mat-toolbar {
@@ -12,7 +11,4 @@
 }
 .sidenav-container {
   height: 100%;
-}
-.sidenav-content {
-  border-radius: 5px;
 }

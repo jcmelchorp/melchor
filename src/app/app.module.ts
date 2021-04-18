@@ -7,6 +7,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { CarouselModule } from "ngx-bootstrap/carousel";
+
 import { ChartsModule } from 'ng2-charts';
 
 import { environment } from '../environments/environment';
@@ -35,6 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SharedModule.forRoot(),
     CoreModule,
     ChartsModule,
+    CarouselModule.forRoot(),
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
