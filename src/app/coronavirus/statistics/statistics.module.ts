@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ChartsModule } from 'ng2-charts';
-
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { StatisticsRoutingModule } from './statistics-routing.module';
@@ -31,7 +29,6 @@ import { StatesComponent } from './components/states/states.component';
     SharedModule,
     StatisticsRoutingModule,
     HttpClientModule,
-    ChartsModule,
     ReactiveFormsModule,
     //AngularFireModule.initializeApp(environment.firebaseConfig),
     //AngularFireDatabaseModule,

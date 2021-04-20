@@ -1,0 +1,19 @@
+.img-flag {
+  width: auto;
+  height: 30px;
+}
+.card {
+  background: transparent;
+  width: 500px;
+  margin: 50px auto auto auto;
+}
+
+.expandable-content {
+  overflow: hidden;
+}
+.fa-icon {
+  transition: all 0.5s linear;
+}
+.clicked {
+  transform: rotate(180deg);
+}

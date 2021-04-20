@@ -1,3 +1,4 @@
+import { ExpandableCardComponent } from './expandable-card/expandable-card.component';
 import { AlertComponent } from './alert/alert.component';
 import { BrandButtonComponent } from './brand-button/brand-button.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
@@ -12,8 +13,10 @@ export const sharedComponents: any[] = [
   UnderConstructionComponent,
   NotFoundComponent,
   BrandButtonComponent,
-  BreadcrumbComponent
+  BreadcrumbComponent,
+  ExpandableCardComponent
 ]
+export * from './expandable-card/expandable-card.component';
 export * from './alert/alert.component';
 export * from './snack/snack.component';
 export * from './dummy-text/dummy-text.component';

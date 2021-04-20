@@ -26,7 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +36,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     SharedModule.forRoot(),
     CoreModule,
-    ChartsModule,
     CarouselModule.forRoot(),
     TranslateModule.forRoot({
       defaultLanguage: 'en',

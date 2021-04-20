@@ -1,0 +1,22 @@
+<div class="mat-spinner" *ngIf="(loading$|async) && !(loaded$|async)" fxLayout="column" fxLayoutAlign="center center">
+  <mat-spinner strokeWidth="18" [diameter]="120" title="Buscando">
+  </mat-spinner>
+  <span>Buscando ...</span><br>
+</div>
+<div *ngIf="!(loading$|async) && (summary$|async) as summary">
+  <mat-form-field class="d-block mb-n5" appearance="outline">
+    <mat-label>Selecciona otro país</mat-label>
+    <mat-select placeholder="Global" (selectionChange)="onChangeSelection($event.value)">
+      <mat-option value="">Selecciona un país</mat-option>
+      <mat-option *ngFor="let country of summary.Countries" [value]="country">
+        <img class="mr-2 img-flag" src="assets/flags/{{country.CountryCode.toLowerCase()}}.svg"
+          alt="{{country.Country}}">{{country.Country|titlecase}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="5px" fxLayoutAlign="start start">
+    <app-summary-card fxFlex="0 1 calc(50% - 2px)" fxFlex.lt-md="100%" [total]="global"> </app-summary-card>
+    <app-summary-card fxFlex="0 1 calc(50% - 2px)" fxFlex.lt-md="100%" [total]="selectedCountry"></app-summary-card>
+  </div>
+  <app-country-map></app-country-map>
+</div>

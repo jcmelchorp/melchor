@@ -16,9 +16,10 @@ const routes: Routes = [{
     { path: 'settings', component: SettingsComponent, data: { title: 'Settings' } },
     { path: 'crypto', loadChildren: () => import('./cryptocurrency/cryptocurrency.module').then(m => m.CryptocurrencyModule), data: { breadcrumb: null, title: 'Cryptocurrency' } },
     { path: 'periodic-table', loadChildren: () => import('./periodic-table/periodic-table.module').then(m => m.PeriodicTableModule), data: { breadcrumb: null, title: 'Periodic Table' } },
-    { path: 'coronavirus', loadChildren: () => import('./coronavirus/coronavirus.module').then(m => m.CoronavirusModule), data: { breadcrumb: null, title: 'Coronavirus' } },
+    { path: 'covid', loadChildren: () => import('./covid/covid.module').then(m => m.CovidModule), data: { breadcrumb: null, title: 'Coronavirus' } },
   ],
 },
+{ path: 'covid', loadChildren: () => import('./covid/covid.module').then(m => m.CovidModule) },
 
 ];
 @NgModule({

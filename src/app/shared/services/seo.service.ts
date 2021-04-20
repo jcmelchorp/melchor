@@ -8,7 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { filter, map } from 'rxjs/operators';
 
 import { AlertComponent } from './../components/alert/alert.component';
-import { SnackComponent } from '../components/snack/snack.component';
 
 @Injectable({
   providedIn: 'root',

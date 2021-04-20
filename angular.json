@@ -23,8 +23,7 @@
             "allowedCommonJsDependencies": [
               "chart.js",
               "chartjs-plugin-annotation",
-              "chartjs-plugin-datalabels",
-              "atom-structure"
+              "chartjs-plugin-datalabels"
             ],
             "outputPath": "dist/melchor",
             "index": "src/index.html",
@@ -35,7 +34,12 @@
             "assets": [
               "src/.well-known",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images/",
+                "output": "./assets"
+              }
             ],
             "styles": [
               "src/styles.scss",
@@ -44,10 +48,7 @@
               "./node_modules/katex/dist/katex.css",
               "./node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": [
-              "node_modules/chart.js/dist/Chart.min.js",
-              "src/assets/script/atom-structure.js"
-            ]
+            "scripts": ["node_modules/chart.js/dist/Chart.min.js"]
           },
           "configurations": {
             "production": {
@@ -120,7 +121,12 @@
             "assets": [
               "src/.well-known",
               "src/assets",
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              {
+                "glob": "**/*",
+                "input": "node_modules/leaflet/dist/images/",
+                "output": "./assets"
+              }
             ],
             "styles": [
               "src/styles.scss",
@@ -129,10 +135,7 @@
               "./node_modules/katex/dist/katex.css",
               "./node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": [
-              "node_modules/chart.js/dist/Chart.min.js",
-              "src/assets/script/atom-structure.js"
-            ]
+            "scripts": ["node_modules/chart.js/dist/Chart.min.js"]
           }
         },
         "lint": {

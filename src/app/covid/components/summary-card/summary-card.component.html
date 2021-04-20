@@ -1,0 +1,49 @@
+<div class="card" *ngIf="total">
+  <h1 class="card-header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div>
+      <img class="mr-2 img-flag" src="assets/flags/{{total.CountryCode.toLowerCase()}}.svg"
+        alt="{{total.Country}}">{{total.Country|titlecase}}
+    </div>
+
+  </h1>
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="space-around start">
+      <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start top">
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+          <fa-icon class="text-warning fa-icon" size="2x" [icon]="faHeadSideVirus"></fa-icon>
+          <h5 class="mt-n2">Confirmados</h5>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-between end">
+          <h2>{{total.TotalConfirmed|number}}</h2>
+          <h3 class="mt-n4 text-warning">+{{total.NewConfirmed|number}}</h3>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start top">
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+          <fa-icon class="text-danger fa-icon" size="2x" [icon]="faSkullCrossbones"></fa-icon>
+          <h5 class="mt-n2">Defunciones:</h5>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-between end">
+          <h2>{{total.TotalDeaths|number}} </h2>
+          <h3 class="mt-n4 text-danger">+{{total.NewDeaths|number}}</h3>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start top">
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+          <fa-icon class="text-success fa-icon" size="2x" [icon]="faHeadSideMask"></fa-icon>
+          <h5 class="mt-n2">Recuperados:</h5>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-around end">
+          <h2>{{total.TotalRecovered|number}}</h2>
+          <h3 class="mt-n4 text-success">+{{total.NewRecovered|number}}</h3>
+        </div>
+      </div>
+    </div>
+    <app-country-doughnut [doughnutChartLabels]="['Confirmed','Deaths','Recovered']" [doughnutChartData]="multiDataSet">
+    </app-country-doughnut>
+  </div>
+  <div class="card-footer">Ultima actualización:&nbsp;{{total.Date|date:'medium'}}</div>
+</div>

@@ -1,10 +1,3 @@
-<mat-toolbar>
-  <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sidenavtwo.toggle()"
-    [ngClass]="{ hidden: !deviceSm }">
-    <fa-icon aria-label="Side nav toggle icon" [icon]="menu" size="lg"></fa-icon>
-  </button>
-  <span>Números</span>
-</mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenavtwo [opened]="!deviceSm" role="navigation" [mode]="!deviceSm ? 'side' : 'over'">
     <mat-nav-list>

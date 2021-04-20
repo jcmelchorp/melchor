@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import * as L from 'leaflet';
 import { HttpClient } from '@angular/common/http';
+
+import * as L from 'leaflet';
+
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,11 +12,12 @@ export class MapService {
   states: string =
     'https://raw.githubusercontent.com/mexicovid19/Mexico-datos/master/datos/geograficos/mexico.geojson';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  makePlotStates(map: L.map): Observable<any> {
+  makePlotStates(map: L.Map): Observable<any> {
     return this.http.get(this.states);
   }
+
   makeStatesPopup(data: any): string {
     return (
       `` +
