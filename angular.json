@@ -23,7 +23,10 @@
             "allowedCommonJsDependencies": [
               "chart.js",
               "chartjs-plugin-annotation",
-              "chartjs-plugin-datalabels"
+              "chartjs-plugin-datalabels",
+              "core-js",
+              "raf",
+              "xlsx"
             ],
             "outputPath": "dist/melchor",
             "index": "src/index.html",

@@ -1,5 +1,4 @@
 <div class="d-block">
-
   <mat-form-field *ngIf="(countries$|async) as countries" appearance="outline">
     <mat-label>Intervalo de tiempo</mat-label>
     <mat-select placeholder="Placeholder" (selectionChange)="onSelectChange($event.value)">
@@ -35,12 +34,14 @@
     <div>Casos recuperados:&nbsp;{{selectedCountry.TotalRecovered|number}}({{selectedCountry.NewRecovered|number}})
     </div>
   </div>
+  <div *ngIf="!(loading$|async) && selectedCountry && dataPoints;else spinner">
+    <app-historical-by-country [lineChartData]="dataPoints" [lineChartLabels]="dataLabels">
+    </app-historical-by-country>
+  </div>
 
 
 </div>
-<app-historical-by-country *ngIf="!(loading$|async);else spinner" [lineChartData]="dataPoints"
-  [lineChartLabels]="dataLabels">
-</app-historical-by-country>
+
 <ng-template #spinner>
   <div class="mat-spinner" fxLayout="column" fxLayoutAlign="center center">
     <mat-spinner strokeWidth="10" [diameter]="75">

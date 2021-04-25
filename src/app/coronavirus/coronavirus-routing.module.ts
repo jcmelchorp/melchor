@@ -3,22 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { CoronavirusComponent } from './coronavirus.component';
 
+import { CountryResolver } from './services/country.resolver';
+
 const routes: Routes = [
-  { path: '', component: CoronavirusComponent },
   {
-    path: 'statistics',
-    loadChildren: () =>
-      import('./statistics/statistics.module').then(
-        (m) => m.StatisticsModule
-      ),
-  },
-  {
-    path: 'information',
-    loadChildren: () =>
-      import('./information/information.module').then(
-        (m) => m.InformationModule
-      ),
-  },];
+    path: '',
+    component: CoronavirusComponent,
+    resolve: { country: CountryResolver },
+    data: {
+      breadcrumb: 'El mundo'
+    }
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

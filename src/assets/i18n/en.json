@@ -1,7 +1,7 @@
 {
-  "app-name": "Melchor",
-  "coronavirus-name": "Coronavirus MX",
-  "coronavirus-description": "Information about pandemic induced by SARS-CoV2 nobel coronavirus",
+  "app-name": "M",
+  "coronavirus-header-title": "Coronavirus MX",
+  "coronavirus-header-description": "Information about pandemic induced by SARS-CoV2 nobel coronavirus",
   "coronavirus-about-message": "Coronavirus-mx is an independent web application who aims to offers to the public the most relevant information about the pandemic state caused by the Novel Coronavirus and its asociated deseess SARS-CoV2, focused on the country of México.",
   "language-es-name": "Spanish",
   "language-en-name": "English",

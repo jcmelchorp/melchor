@@ -10,7 +10,7 @@
       <button type="button" aria-label="Alternar idioma" mat-icon-button [matMenuTriggerFor]="languageMenu">
         <div fxLayout="column" fxLayoutAlign="end center">
           <mat-icon>language</mat-icon>
-          <span style="margin-top: -15px;">{{ translate.currentLang }}</span>
+          <span style="margin-top: -10px;">{{ translate.currentLang }}</span>
         </div>
       </button>
       <mat-menu #languageMenu="matMenu">
@@ -26,7 +26,7 @@
       <button type="button" aria-label="Alternar tema" mat-icon-button (click)="toggleDarkTheme()">
         <div fxLayout="column" fxLayoutAlign="end center">
           <mat-icon>{{(isDarkTheme|async)?'nightlight':'light_mode'}}</mat-icon>
-          <span style="margin-top: -15px;">{{ (isDarkTheme|async)?'off':'on' }}</span>
+          <span style="margin-top: -10px;">{{ (isDarkTheme|async)?'off':'on' }}</span>
         </div>
       </button>
     </div>

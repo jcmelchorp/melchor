@@ -5,17 +5,20 @@
       <mat-nav-list>
         <app-brand-button></app-brand-button>
         <h3 matSubheader>API datasets</h3>
-        <mat-list-item [routerLink]="['crypto']" routerLinkActive="active">
-          <fa-icon matListIcon [icon]="faCommentsDollar"></fa-icon>
+        <mat-list-item [routerLink]="['/crypto']" (click)="isHandset?toggleSidenavLeft($event):null"
+          routerLinkActive="active">
+          <mat-icon matListIcon>price_change</mat-icon>
           <span matLine>Cryptocurrencies</span>
         </mat-list-item>
-        <mat-list-item [routerLink]="['covid']" routerLinkActive="active">
-          <fa-icon matListIcon [icon]="faViruses"></fa-icon>
+        <mat-list-item [routerLink]="['/coronavirus']" (click)="isHandset?toggleSidenavLeft($event):null"
+          routerLinkActive="active">
+          <mat-icon matListIcon>coronavirus</mat-icon>
           <span matLine>Coronavirus</span>
         </mat-list-item>
         <h3 matSubheader>Science</h3>
-        <mat-list-item [routerLink]="['periodic-table']" routerLinkActive="active">
-          <fa-icon matListIcon [icon]="faFlask"></fa-icon>
+        <mat-list-item [routerLink]="['/periodic-table']" (click)="isHandset?toggleSidenavLeft($event):null"
+          routerLinkActive="active">
+          <mat-icon matListIcon>science</mat-icon>
           <span matLine>Periodic Table</span>
         </mat-list-item>
         <!--   -->

@@ -1,0 +1,10 @@
+<div class="mat-spinner" *ngIf="(loading$|async)" fxLayout="column" fxLayoutAlign="center center">
+  <mat-spinner strokeWidth="18" [diameter]="120" title="Buscando">
+  </mat-spinner>
+  <span>Buscando ...</span><br>
+</div>
+
+<div *ngIf="!(loading$|async)">
+  <app-historical-by-country [lineChartData]="dataSets" [lineChartLabels]="time">
+  </app-historical-by-country>
+</div>

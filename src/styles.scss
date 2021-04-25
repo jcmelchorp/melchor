@@ -1,4 +1,4 @@
-@import "assets/theme/custom-theme.scss";
+@import "assets/theme/scholar-theme.scss";
 @import "assets/theme/variables";
 @import "assets/theme/colors";
 html,
@@ -7,7 +7,6 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .app-name {
   font-family: "Modak", cursive;
@@ -22,14 +21,14 @@ body {
   color: $heading-color;
 }
 .view-title {
-  color: $bg-main;
+  color: $success-color;
   font-size: calc(2rem + 1.5vw);
   font-weight: 800;
   font-family: "fredoka one", cursive;
-  text-shadow: -3px -2px 1px $text-shadow-color;
+  text-shadow: -2px -1px 1px $text-shadow-color;
 }
 .view-subtitle {
-  font-family: "comfortaa";
+  //font-family: "comfortaa";
   font-size: calc(0.8rem + 1vw);
   font-weight: 400;
 }

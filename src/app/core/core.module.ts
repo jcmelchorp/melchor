@@ -23,5 +23,4 @@ export class CoreModule {
       throw new Error('You should import core module only in the root module')
     }
   }
-
 }

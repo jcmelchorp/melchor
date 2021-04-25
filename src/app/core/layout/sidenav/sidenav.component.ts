@@ -27,6 +27,8 @@ export class SidenavComponent implements OnInit {
       this.sidenavLeft.toggle();
     });
   }
-
+  toggleSidenavLeft($event: any) {
+    this.layoutService.toggleSidenavLeft.emit($event);
+  }
   ngOnInit() { }
 }

@@ -20,6 +20,7 @@ import { appearanceModules } from './material';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppStoreModule } from './store/app-store.module';
+import { OverlayContainer } from '@angular/cdk/overlay';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -38,7 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CoreModule,
     CarouselModule.forRoot(),
     TranslateModule.forRoot({
-      defaultLanguage: 'en',
+      defaultLanguage: 'es',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
@@ -50,4 +51,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(overlayContainer: OverlayContainer) {
+    overlayContainer.getContainerElement().classList.add('dark-theme');
+
+  }
+}

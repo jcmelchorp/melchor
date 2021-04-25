@@ -1,0 +1,25 @@
+.img-flag {
+  width: auto;
+  height: 20px;
+}
+.card {
+  width: fit-content;
+  background: transparent;
+  margin: 0;
+  .card-header {
+    height: 30px;
+  }
+  .card-footer {
+    max-height: fit-content;
+  }
+}
+
+.expandable-content {
+  overflow: hidden;
+}
+.fa-icon {
+  transition: all 0.5s linear;
+}
+.clicked {
+  transform: rotate(180deg);
+}

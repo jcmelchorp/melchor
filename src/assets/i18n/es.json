@@ -1,7 +1,7 @@
 {
-  "app-name": "Melchor",
-  "coronavirus-name": "Coronavirus MX",
-  "coronavirus-description": "Información sobre la pandemia causada por el nuevo coronavirus SARS-CoV2",
+  "app-name": "M",
+  "coronavirus-header-title": "Coronavirus MX",
+  "coronavirus-header-description": "Información sobre la pandemia causada por el nuevo coronavirus SARS-CoV2",
   "coronavirus-about-message": "Coronavirus-mx es una aplicación independiente diseñada para accedes fácilemnte a la información más relevante sobre la pandemia causada por el nuevo coronavirus SARS-CoV2, con especial atención a la República Mexicana.",
   "language-es-name": "Español",
   "language-en-name": "Inglés",

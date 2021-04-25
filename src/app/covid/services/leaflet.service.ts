@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import * as L from 'leaflet';
 
-import { Regional } from '../models/country.model';
+import { CountryData } from '../models/country.model';
 
 @Injectable()
 export class LeafletService {
@@ -40,7 +40,7 @@ export class LeafletService {
   }
 
   makeCityCircleMarkers(map: L.Map): void {
-    this.http.get(this.url).subscribe((res: Regional[]) => {
+    this.http.get(this.url).subscribe((res: CountryData[]) => {
       const maxPop = Math.max(...res.map(x => x.Active), 0);
       for (const c of res) {
         const lon: number = c.Lon;
