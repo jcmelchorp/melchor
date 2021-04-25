@@ -21,7 +21,7 @@ export class CasesCardComponent implements OnChanges {
   constructor() { }
   ngOnInit() {
     const date = new Date().toLocaleDateString();
-    this.casesCountry = { ...this.casesCountry, abbreviation: 'all', updated: [date] }
+    this.casesCountry = { ...this.casesCountry, abbreviation: 'all' }
   }
   ngOnChanges() {
     const totalData: SingleDataSet = [this.casesCountry.confirmed, this.casesCountry.deaths, this.casesCountry.recovered];

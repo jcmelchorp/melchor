@@ -19,7 +19,7 @@ export class CoronavirusComponent implements OnInit {
   countryCases$: Observable<Country[]>;
   countryGlobalCases$: Observable<Partial<Country>>;
   countrySelectedCases$: Observable<Country>;
-  global: Observable<Country>;
+  global$: Observable<Country>;
   continents: Continent[] = [
     { name: 'Asia', disabled: false, countries: [] = [] },
     { name: 'Europe', disabled: false, countries: [] = [] },
@@ -50,6 +50,11 @@ export class CoronavirusComponent implements OnInit {
     this.loaded$ = this.countryCountryService.loaded$;
     this.loading$ = this.countryCountryService.loading$;
     this.countryCases$ = this.countryCountryService.entities$
+  }
+
+
+  ngOnInit(): void {
+    this.countryCases$ = this.countryCountryService.entities$
       .pipe(
         map(countries => {
           const countrySelect = countries.map(country => {
@@ -62,19 +67,15 @@ export class CoronavirusComponent implements OnInit {
           this.continents.map(continent => {
             continent.countries.push(...countrySelect.filter(x => x.continent == continent.name))
           })
-          this.getLocation();
+          //this.getLocation();
           return countries;
         }),
 
       );
-  }
-
-
-  ngOnInit(): void {
-    this.global = this.countryCountryService.entities$
+    this.global$ = this.countryCountryService.entities$
       .pipe(
         map(countries => countries.find(x => x.name == 'Global')),
-        tap(res => console.log(res))
+        //tap(res => console.log(res))
       );
   }
   onChangeSelection(abbreviation?: string) {

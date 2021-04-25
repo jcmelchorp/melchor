@@ -4,7 +4,7 @@
 </div>
 <div class="my-4">
   <div fxLayout="row" fxLayoutAlign="center center">
-    <app-cases-card [casesCountry]="global|async"></app-cases-card>
+    <app-cases-card [casesCountry]="global$|async"></app-cases-card>
   </div>
 </div>
 <div *ngIf="(loaded$|async) && !(loading$|async) && (countryCases$|async);else spinner">
@@ -23,7 +23,7 @@
   </mat-form-field>
 </div>
 <div *ngIf="(loaded$|async) && !(loading$|async) && (countryCases$|async);else spinner">
-  <app-world-map [country]="countryCases$|async" [abbreviation]="abbreviation"></app-world-map>
+  <app-world-map [countries]="countryCases$|async" [abbreviation]="abbreviation"></app-world-map>
 </div>
 
 

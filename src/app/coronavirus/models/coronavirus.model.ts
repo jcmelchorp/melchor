@@ -6,7 +6,7 @@
 export interface Country extends CurrentCountryCases {
   province?: Province[]
 }
-export interface CurrentCountryCases extends Cases {
+export interface CurrentCountryCases {
   country: string;
   abbreviation: string;
   continent: string;
@@ -18,7 +18,13 @@ export interface CurrentCountryCases extends Cases {
   location: string;
   population: number;
   sq_km_area: number;
+  lat: string,
+  long: string,
   history?: Cases;
+  confirmed: number;
+  deaths: number;
+  recovered: number;
+  updated: string;
 
 }
 export interface Cases {
