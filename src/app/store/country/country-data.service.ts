@@ -3,60 +3,29 @@ import { Injectable } from '@angular/core';
 
 import { DefaultDataService, HttpUrlGenerator, QueryParams } from '@ngrx/data';
 
-import { Observable } from 'rxjs';
-import { map, mergeMap, pluck, tap } from 'rxjs/operators';
+import { Observable, combineLatest, of, merge, from } from 'rxjs';
+import { map, mergeMap, pluck, tap, combineAll, switchMap, concatMap, subscribeOn } from 'rxjs/operators';
+
+import { Summary, History } from 'src/app/coronavirus/models/covid.model';
 
 import { Cases, Country } from '../../coronavirus/models/coronavirus.model';
 import { CoronavirusApiService } from '../../coronavirus/services/coronavirus-api.service';
 
 import * as fromCountry from '.';
+import { CountryEntityService } from './country-entity.service';
 @Injectable()
 export class CountryDataService extends DefaultDataService<Country> {
   constructor(
     http: HttpClient,
     httpUrlGenerator: HttpUrlGenerator,
-    private coronavirusApiService: CoronavirusApiService
+    private coronavirusApiService: CoronavirusApiService,
+    private countryEntityService: CountryEntityService
   ) {
     super(fromCountry.entityCollectionName, http, httpUrlGenerator);
   }
   getAll(): Observable<Country[]> {
-    this.coronavirusApiService.getCurrentCases().pipe(
-      map(countries => {
-        countries.map(country => {
-          const obsHist = this.coronavirusApiService.getCurrentCountryTimelineCases({ country: country.name, status: 'deaths' }).pipe(
-            pluck('All', 'dates'),
-            map(res => {
-              return {
-                deaths: Object.values(res).reverse()
-              }
-            }),
-            mergeMap(case1 => this.coronavirusApiService.getCurrentCountryTimelineCases({ country: country.name, status: 'confirmed' }).pipe(
-              pluck('All', 'dates'),
-              map(res => {
-                return {
-                  deaths: case1.deaths,
-                  confirmed: Object.values(res).reverse()
-                }
-              })
-            )),
-            mergeMap(case2 => this.coronavirusApiService.getCurrentCountryTimelineCases({ country: country.name, status: 'recovered' }).pipe(
-              pluck('All', 'dates'),
-              map(res => {
-                return {
-                  dates: Object.keys(res).reverse(),
-                  deaths: case2.deaths,
-                  confirmed: case2.confirmed,
-                  recovered: Object.values(res).reverse()
-                }
-              })
-            ))
-          );
-
-        })
-      })
-    );
-
-    return;
+    let obsAll = this.coronavirusApiService.getCurrentCases()
+    return obsAll
   }
   getWithQuery(queryParams: QueryParams): Observable<Country[]> {
     return this.coronavirusApiService.getCurrentCountryTimelineCases(queryParams) as Observable<Country[]>;

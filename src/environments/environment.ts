@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   cryptocurrencyApi: 'https://api.coincap.io/v2/assets',
   coronavirusApi: 'https://covid-api.mmediagroup.fr/v1/',
+  countriesApi: 'https://api.covid19api.com/',
   firebaseConfig: {
     apiKey: "AIzaSyD7CINCqbY92rE7Yp_xwd75XAdNCOvME80",
     authDomain: "julio-melchor.firebaseapp.com",

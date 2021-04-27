@@ -4,8 +4,11 @@ import { Observable, of } from 'rxjs';
 import { combineAll, map, mergeMap, pluck, switchMap, tap } from 'rxjs/operators';
 
 import { CountryEntityService } from '../store/country/country-entity.service';
+import { SummaryEntityService } from './../store/summary/summary-entity.service';
+import { VaccineEntityService } from '../store/vaccine/vaccines-entity.service';
 
-import { Continent, Country, CurrentCountryCases } from './models/coronavirus.model';
+import { Continent, Country, CurrentCountryCases, Vaccine } from './models/coronavirus.model';
+import { Summary } from './models/covid.model';
 import { CoronavirusApiService } from './services/coronavirus-api.service';
 
 
@@ -40,21 +43,40 @@ export class CoronavirusComponent implements OnInit {
     abbreviation: string,
     continent: string
   }>;
-  loaded$: Observable<boolean>;
-  loading$: Observable<boolean>;
+  summaryLoaded$: Observable<boolean>;
+  loadingSummary$: Observable<boolean>;
+  countryLoaded$: Observable<boolean>;
+  loadingCountry$: Observable<boolean>;
+  vaccinesLoaded$: Observable<boolean>;
+  loadingVaccine$: Observable<boolean>;
+  vaccines$: Observable<Vaccine[]>;
+  globalVaccine$: Observable<Vaccine>;
   defaultElevation = 4;
   raisedElevation = 6;
+  summary$: Observable<Summary>;
   constructor(
     private countryCountryService: CountryEntityService,
+    private summaryEntityService: SummaryEntityService,
+    private vaccinesEntityService: VaccineEntityService
   ) {
-    this.loaded$ = this.countryCountryService.loaded$;
-    this.loading$ = this.countryCountryService.loading$;
-    this.countryCases$ = this.countryCountryService.entities$
+    this.summaryLoaded$ = this.summaryEntityService.loaded$;
+    this.loadingSummary$ = this.summaryEntityService.loading$;
+    this.countryLoaded$ = this.countryCountryService.loaded$;
+    this.loadingCountry$ = this.countryCountryService.loading$;
+    this.vaccinesLoaded$ = this.vaccinesEntityService.loaded$;
+    this.loadingVaccine$ = this.vaccinesEntityService.loading$;
   }
 
 
   ngOnInit(): void {
     this.countryCases$ = this.countryCountryService.entities$
+    this.summary$ = this.summaryEntityService.entities$.pipe(
+      map(summary => summary.pop())
+    )
+    this.globalVaccine$ = this.vaccinesEntityService.entities$.pipe(
+      map(vaccines => vaccines.find(v => v.name == 'Global'))
+    )
+    /* this.countryCases$ = this.countryCountryService.entities$
       .pipe(
         map(countries => {
           const countrySelect = countries.map(country => {
@@ -71,7 +93,7 @@ export class CoronavirusComponent implements OnInit {
           return countries;
         }),
 
-      );
+      ); */
     this.global$ = this.countryCountryService.entities$
       .pipe(
         map(countries => countries.find(x => x.name == 'Global')),

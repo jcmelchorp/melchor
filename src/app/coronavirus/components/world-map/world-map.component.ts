@@ -1,4 +1,3 @@
-
 import { Component, Input, OnInit, AfterViewInit, Inject, PLATFORM_ID, OnDestroy, NgZone, OnChanges, SimpleChanges } from '@angular/core';
 
 import * as am4core from '@amcharts/amcharts4/core';
@@ -9,18 +8,21 @@ import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
 import am4geodata_data_countries2 from '@amcharts/amcharts4-geodata/data/countries2';
 import am4geodata_lang_ES from '@amcharts/amcharts4-geodata/lang/ES';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
+import { max } from '@amcharts/amcharts4/core';
 
 import { Country } from '../../models/coronavirus.model';
-import { max } from '@amcharts/amcharts4/core';
+import { Summary } from '../../models/covid.model';
+import { CoronavirusApiService } from './../../services/coronavirus-api.service';
 
 @Component({
   selector: 'app-world-map',
   templateUrl: './world-map.component.html',
   styleUrls: ['./world-map.component.scss']
 })
-export class WorldMapComponent implements AfterViewInit {
+export class WorldMapComponent implements AfterViewInit, OnDestroy {
   @Input() countries: Country[]
   @Input() abbreviation: string;
+  summary: Summary;
   chart: am4maps.MapChart;
   onSeries: am4maps.MapPolygonSeries;
   numberFormatter = new am4core.NumberFormatter();
@@ -29,7 +31,6 @@ export class WorldMapComponent implements AfterViewInit {
   confirmedColor = am4core.color("#d21a1a");
   recoveredColor = am4core.color("#45d21a");
   deathsColor = am4core.color("#1c5fe5");
-  colors = { active: this.activeColor, confirmed: this.confirmedColor, recovered: this.recoveredColor, deaths: this.deathsColor };
   countryColor = am4core.color("#3b3b3b");
   countryStrokeColor = am4core.color("#000000");
   buttonStrokeColor = am4core.color("#ffffff");
@@ -38,8 +39,6 @@ export class WorldMapComponent implements AfterViewInit {
   maxPC = { active: 0, confirmed: 0, deaths: 0, recovered: 0 };
   currentIndex;
   currentCountry = "World";
-  // last date of the data
-
   lastDate: Date;
   currentDate: Date;
   currentPolygon;
@@ -90,8 +89,9 @@ export class WorldMapComponent implements AfterViewInit {
   currentSeries: any;
   mapGlobeSwitch: any;
   list: any;
-  constructor(private zone: NgZone) {
-    this.currentDate = this.lastDate;
+  colors: { active: am4core.Color; confirmed: am4core.Color; recovered: am4core.Color; deaths: am4core.Color; };
+  constructor(private api: CoronavirusApiService) {
+    this.colors = { active: this.activeColor, confirmed: this.confirmedColor, recovered: this.recoveredColor, deaths: this.deathsColor };
   }
   createMarkers(country: Country) {
     console.log('calling createMarkers');
@@ -540,7 +540,7 @@ export class WorldMapComponent implements AfterViewInit {
     this.series = this.lineChart.series.push(new am4charts.LineSeries())
     this.series.dataFields.valueY = name;
     this.series.dataFields.dateX = "date";
-    this.series.name = this.capitalizeFirstLetter(name);
+    this.series.name = name;
     this.series.strokeOpacity = 0.6;
     this.series.stroke = color;
     this.series.fill = color;
@@ -616,7 +616,7 @@ export class WorldMapComponent implements AfterViewInit {
       data.list[i].name = this.idToName(data.list[i].id);
     }
 
-    return data;
+    return this.countries;
   }
   capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -673,19 +673,19 @@ export class WorldMapComponent implements AfterViewInit {
   ngAfterViewInit() {
 
     // make a map of country indexes for later use
-    this.countryIndexMap = {};
-    this.list = this.countries['Global'].history;
-    for (var i = 0; i < this.list.length; i++) {
-      var country = this.list[i]
-      this.countryIndexMap[country.id] = i;
-    }
+    /*    this.countryIndexMap = {};
+       this.list = this.;
+       for (var i = 0; i < this.list.length; i++) {
+         var country = this.list[i]
+         this.countryIndexMap[country.id] = i;
+       }
 
-    // calculated active cases in world data (active = confirmed - recovered)
-    for (var i = 0; i < this.countries['Global'].history.length; i++) {
-      var di = this.countries['Global'].history[i];
-      di.active = di.confirmed - di.recovered - di.deaths;
-    }
-
+       // calculated active cases in world data (active = confirmed - recovered)
+       for (var i = 0; i < this.countries['Global'].history.length; i++) {
+         var di = this.countries['Global'].history[i];
+         di.active = di.confirmed - di.recovered - di.deaths;
+       }
+    */
     // function that returns current slide
     // if index is not set, get last slide
 
@@ -694,7 +694,7 @@ export class WorldMapComponent implements AfterViewInit {
     this.slideData = this.getSlideData();
 
     // as we will be modifying raw data, make a copy
-    this.mapData = JSON.parse(JSON.stringify(this.slideData.list));
+    this.mapData = JSON.parse(JSON.stringify(this.countries));
 
     // remove items with 0 values for better performance
     for (var i = this.mapData.length - 1; i >= 0; i--) {
@@ -733,7 +733,7 @@ export class WorldMapComponent implements AfterViewInit {
     this.container.tooltip.fontSize = "0.9em";
     this.container.tooltip.getFillFromObject = false;
     this.container.tooltip.getStrokeFromObject = false;
-    this.mapChart = this.chart.createChild(am4maps.MapChart);
+    this.mapChart = this.container.createChild(am4maps.MapChart);
     this.mapChart.height = am4core.percent(80);
     this.mapChart.zoomControl = new am4maps.ZoomControl();
     this.mapChart.zoomControl.align = "right";
@@ -752,6 +752,7 @@ export class WorldMapComponent implements AfterViewInit {
     // https://www.amcharts.com/docs/v4/chart-types/map/#Map_data
     // you can use more accurate world map or map of any other country - a wide selection of maps available at: https://github.com/amcharts/amcharts4-geodata
     this.mapChart.geodata = am4geodata_worldLow;
+    console.log(am4geodata_worldLow)
     // Set projection
     // https://www.amcharts.com/docs/v4/chart-types/map/#Setting_projection
     // instead of Miller, you can use Mercator or many other projections available: https://www.amcharts.com/demos/map-using-d3-projections/
@@ -1206,7 +1207,7 @@ export class WorldMapComponent implements AfterViewInit {
     this.lineChart.paddingTop = 3;
 
     // make a copy of data as we will be modifying it
-    this.lineChart.data = JSON.parse(JSON.stringify(this.countries['Global'].history));
+    this.lineChart.data = JSON.parse(JSON.stringify(this.countries));
 
     // date axis
     // https://www.amcharts.com/docs/v4/concepts/axes/date-axis/
@@ -1220,9 +1221,9 @@ export class WorldMapComponent implements AfterViewInit {
     this.dateAxis.tooltip.background.stroke = this.activeColor;
     this.dateAxis.renderer.labels.template.fill = am4core.color("#ffffff");
 
-    /* this.dateAxis.renderer.labels.template.adapter.add("fillOpacity", function(fillOpacity, target){
-         returnthis.dateAxis.valueToPosition(target.dataItem.value) + 0.1;
-     }) */
+    this.dateAxis.renderer.labels.template.adapter.add("fillOpacity", (fillOpacity, target) => {
+      return this.dateAxis.valueToPosition(target.dataItem.value) + 0.1;
+    })
 
     // value axis
     // https://www.amcharts.com/docs/v4/concepts/axes/value-axis/
@@ -1404,7 +1405,9 @@ export class WorldMapComponent implements AfterViewInit {
   setTimeout(updateSeriesTooltip: () => void, arg1: number) {
     throw new Error('Method not implemented.');
   }
-
+  ngOnDestroy() {
+    this.chart.dispose();
+  }
 }
 
 

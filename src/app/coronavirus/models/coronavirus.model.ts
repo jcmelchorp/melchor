@@ -21,6 +21,7 @@ export interface CurrentCountryCases {
   lat: string,
   long: string,
   history?: Cases;
+  vaccine?: any;
   confirmed: number;
   deaths: number;
   recovered: number;
@@ -54,5 +55,28 @@ export interface Province {
   confirmed: number;
   recovered: number;
   deaths: number;
+  updated: string;
+}
+/**  */
+export interface CountrySelector {
+  name: string;
+  slug: string;
+  iso2: string
+}
+export interface Vaccine {
+  abbreviation: string;
+  administered: number;
+  capital_city: string;
+  continent: string;
+  country: string;
+  name: string;
+  elevation_in_meters: string;
+  iso: number;
+  life_expectancy: string;
+  location: string;
+  people_partially_vaccinated: number;
+  people_vaccinated: number;
+  population: number;
+  sq_km_area: number;
   updated: string;
 }

@@ -2,12 +2,12 @@
   <div class="view-title">{{"coronavirus-header-title" | translate}}</div>
   <!--  <div class="my-4 view-subtitle">{{"coronavirus-header-description" | translate}}</div> -->
 </div>
-<div class="my-4">
+<div *ngIf="(countryLoaded$|async) && (vaccinesLoaded$|async)" class="my-4">
   <div fxLayout="row" fxLayoutAlign="center center">
-    <app-cases-card [casesCountry]="global$|async"></app-cases-card>
+    <app-cases-card [cases]="global$|async" [vaccine]="globalVaccine$|async"></app-cases-card>
   </div>
 </div>
-<div *ngIf="(loaded$|async) && !(loading$|async) && (countryCases$|async);else spinner">
+<!-- <div *ngIf="(loaded$|async) && !(loading$|async) && (countryCases$|async);else spinner">
   <mat-form-field class="d-block" color="primary" appearance="outline">
     <mat-label>Selecciona un país</mat-label>
     <mat-select panelClass="space-grey" [(ngModel)]="abbreviation" (selectionChange)="onChangeSelection($event.value)">
@@ -21,9 +21,12 @@
       </mat-optgroup>
     </mat-select>
   </mat-form-field>
-</div>
-<div *ngIf="(loaded$|async) && !(loading$|async) && (countryCases$|async);else spinner">
-  <app-world-map [countries]="countryCases$|async" [abbreviation]="abbreviation"></app-world-map>
+</div> -->
+<div fxLayout="row" fxLayoutAlign="center center"
+  *ngIf="(summaryLoaded$|async) && !(loadingSummary$|async) && (summary$|async) as summary;else spinner">
+  <!--   <app-world-map [countries]="countryCases$|async" [abbreviation]="abbreviation"></app-world-map>
+ -->
+  <app-global-summary fxFlex *ngIf="summary.Countries" [countries]="summary.Countries"></app-global-summary>
 </div>
 
 

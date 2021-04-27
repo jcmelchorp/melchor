@@ -1,9 +1,8 @@
-<div class="card" *ngIf="casesCountry">
+<div class="card" *ngIf="cases && vaccine">
   <div class="card-header text-center">
     <p class="mt-n3 mat-h2">
-      <img class="mr-2 img-flag" src="assets/flags/{{casesCountry.abbreviation.toLowerCase()}}.svg"
-        alt="{{casesCountry.name}}"><span>{{casesCountry.name|titlecase}}</span>
-      <small class="text-muted"> (población: {{casesCountry.population|number}})</small>
+      <img class="mr-2 img-flag" src="assets/flags/all.svg" alt="{{cases.name}}"><span>{{cases.name|titlecase}}</span>
+      <small class="text-muted"> (población: {{cases.population|number}})</small>
     </p>
   </div>
   <div class="p-2 m-1 mb-n3 card-body" fxLayout="row" fxLayoutAlign="center start">
@@ -15,8 +14,8 @@
           <p class="mt-n1">Confirmados</p>
         </div>
         <div class="mt-n4 text-right">
-          <p class="my-n2 mat-h3">{{casesCountry.confirmed|number}}</p>
-          <p class="mb-n2 mat-h4 text-warning">&sim;{{casesCountry.confirmed/casesCountry.population|percent:'.2'}}</p>
+          <p class="my-n2 mat-h3">{{cases.confirmed|number}}</p>
+          <p class="mb-n2 mat-h4 text-warning">&sim;{{cases.confirmed/cases.population|percent:'.2'}}</p>
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="start center">
@@ -25,8 +24,8 @@
           <p class="mt-n1">Defunciones:</p>
         </div>
         <div class="mt-n4 text-right">
-          <p class="my-n2 mat-h3">{{casesCountry.deaths|number}}</p>
-          <p class="mb-n2 mat-h4 text-danger">&sim;{{casesCountry.deaths/casesCountry.population|percent:'.2'}}</p>
+          <p class="my-n2 mat-h3">{{cases.deaths|number}}</p>
+          <p class="mb-n2 mat-h4 text-danger">&sim;{{cases.deaths/cases.population|percent:'.2'}}</p>
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center">
@@ -35,49 +34,52 @@
           <p class="mt-n1">Recuperados:</p>
         </div>
         <div class="mt-n4 text-right">
-          <p class="my-n2 mat-h3">{{casesCountry.recovered|number}}</p>
-          <p class="mb-n2 mat-h4 text-success">&sim;{{casesCountry.recovered/casesCountry.population|percent:'.2'}}</p>
+          <p class="my-n2 mat-h3">{{cases.recovered|number}}</p>
+          <p class="mb-n2 mat-h4 text-success">&sim;{{cases.recovered/cases.population|percent:'.2'}}</p>
         </div>
       </div>
     </div>
-    <app-cases-doughnut [doughnutChartLabels]="['','','']"
-      [doughnutChartData]="[casesCountry.confirmed, casesCountry.deaths, casesCountry.recovered]">
+    <app-cases-doughnut [doughnutChartLabels]="['','','','','','']"
+      [doughnutChartData]="[cases.confirmed, cases.deaths, cases.recovered,vaccine.administered,vaccine.people_partially_vaccinated,vaccine.people_vaccinated]">
     </app-cases-doughnut>
-    <div fxLayout="column" fxLayoutAlign="center end">
+    <div fxLayout="column" fxLayoutAlign="center start">
       <div fxLayout="row" fxLayoutAlign="start center">
-        <div class="mt-n4 text-right">
-          <p class="my-n2 mat-h3">{{casesCountry.confirmed|number}}</p>
-          <p class="mb-n2 mat-h4 text-warning">&sim;{{casesCountry.confirmed/casesCountry.population|percent:'.2'}}</p>
+        <div class="mt-n4 text-left">
+          <p class="my-n2 mat-h3">{{vaccine.administered|number}}</p>
+          <p class="mb-n2 mat-h4 text-primary">&sim;{{vaccine.administered/cases.population|percent:'.2'}}</p>
         </div>
         <div class="mt-n2 text-center">
-          <fa-icon class="text-warning fa-icon" size="2x" [icon]="faHeadSideVirus">
+          <fa-icon class="text-primary fa-icon" size="2x" [icon]="faHandHoldingMedical">
           </fa-icon>
-          <p class="mt-n1">Confirmados</p>
+          <p class="mt-n1">Administradas</p>
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="start center">
-        <div class="mt-n4 text-right">
-          <p class="my-n2 mat-h3">{{casesCountry.deaths|number}}</p>
-          <p class="mb-n2 mat-h4 text-danger">&sim;{{casesCountry.deaths/casesCountry.population|percent:'.2'}}</p>
+        <div class="mt-n4 text-left">
+          <p class="my-n2 mat-h3">{{vaccine.people_partially_vaccinated|number}}</p>
+          <p class="mb-n2 mat-h4 text-info">
+            &sim;{{vaccine.people_partially_vaccinated/cases.population|percent:'.2'}}</p>
         </div>
         <div class="mt-n2 text-center">
-          <fa-icon class="text-danger fa-icon" size="2x" [icon]="faSkullCrossbones"></fa-icon>
-          <p class="mt-n1">Defunciones:</p>
+          <fa-icon class="text-info fa-icon" size="2x" [icon]="faSyringe"></fa-icon>
+          <p class="mt-n1">Vacunados (1/2):</p>
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center">
-        <div class="mt-n4 text-right">
-          <p class="my-n2 mat-h3">{{casesCountry.recovered|number}}</p>
-          <p class="mb-n2 mat-h4 text-success">&sim;{{casesCountry.recovered/casesCountry.population|percent:'.2'}}</p>
+        <div class="mt-n4 text-left">
+          <p class="my-n2 mat-h3">{{vaccine.people_vaccinated|number}}</p>
+          <p class="mb-n2 mat-h4 text-success">
+            &sim;{{vaccine.people_vaccinated/cases.population|percent:'.2'}}</p>
         </div>
         <div class="mt-n2 text-center">
-          <fa-icon class="text-success fa-icon" size="2x" [icon]="faHeadSideMask"></fa-icon>
-          <p class="mt-n1">Recuperados:</p>
+          <fa-icon class="text-success fa-icon" size="2x" [icon]="faShieldVirus"></fa-icon>
+          <p class="mt-n1">Vacunados:</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="p-1 card-footer text-center"><span class="text-muted">Ultima
-      actualización:&nbsp;{{casesCountry.updated}}</span>
+  <div class="p-1 card-footer text-center">
+    <span class="text-muted">Última
+      actualización:&nbsp;{{vaccine.updated|date:'short'}}</span>
   </div>
 </div>

@@ -2,18 +2,24 @@ import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular
 import { Injectable } from '@angular/core';
 import { MatCardXlImage } from '@angular/material/card';
 
+import countries2 from '@amcharts/amcharts4-geodata/data/countries2';
+
 import { QueryParams } from '@ngrx/data';
 
 import { environment } from 'src/environments/environment';
 
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError, tap, map, pluck } from 'rxjs/operators';
+import { retry, catchError, tap, map, pluck, mergeMap, flatMap, switchMap } from 'rxjs/operators';
 
-import { Country } from '../models/coronavirus.model';
+import { Vaccine } from './../models/coronavirus.model';
+import { Country, CountrySelector } from '../models/coronavirus.model';
+import { CountryInfo, Summary } from '../models/covid.model';
 
 @Injectable()
 export class CoronavirusApiService {
+
   private SERVER_URL: string = environment.coronavirusApi;
+  private COVID19_URL: string = environment.countriesApi;
   constructor(private _httpClient: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({
@@ -21,6 +27,63 @@ export class CoronavirusApiService {
       'Access-Control-Allow-Origin': '*'
     }),
   };
+
+  //   COVID19 API
+  getCountries(): Observable<CountryInfo[]> {
+    const url: string = 'countries/';
+    return this._httpClient.get(this.COVID19_URL + url, {
+      observe: 'body',
+    }).pipe(
+      retry(3),
+      map((resp) => resp as CountryInfo[]),
+      catchError(this.handleError)
+    );
+  }
+  getHistory(slug: string): Observable<History[]> {
+    const url: string = `total/country/${slug}`;
+    return this._httpClient.get(this.COVID19_URL + url, {
+      observe: 'body',
+    }).pipe(
+      retry(3),
+      map((resp) => resp as History[]),
+      catchError(this.handleError)
+    );
+  }
+  getSummary(): Observable<Summary[]> {
+    const url: string = 'summary';
+    return this._httpClient.get<Summary>(this.COVID19_URL + url, {
+      observe: 'body',
+    }).pipe(
+      retry(3),
+      map((resp) => [resp]),
+      catchError(this.handleError)
+    );
+  }
+
+  //   CORONAVIRUS API
+  getVaccines(): Observable<Vaccine[]> {
+    const url: string = 'vaccines/';
+    return this._httpClient.get(this.SERVER_URL + url, {
+      observe: 'body',
+    }).pipe(
+      retry(3),
+      //tap(resp => console.log(resp)),
+      map((resp) => {
+        let arr = Object.keys(resp).map(key => { return { ...resp[key], name: key } });
+        let newArr = arr.map(vaccine => {
+          let ordered: Vaccine = {
+            ...vaccine.All,
+            name: vaccine.name,
+            province: Object.keys(vaccine).filter(c => c != 'All').map(key => { return { ...vaccine[key], name: key } })
+          };
+          return ordered;
+        });
+        return newArr;
+      }),
+      catchError(this.handleError)
+
+    );
+  }
   getCurrentCountryTimelineCases(queryParams: QueryParams) {
     const url: string = 'history/';
     return this._httpClient.get(this.SERVER_URL + url, {
@@ -28,9 +91,40 @@ export class CoronavirusApiService {
       observe: 'body',
     }).pipe(
       retry(3),
-      /* tap(resp => console.log(resp.body)), */
+      tap(resp => console.log(resp)),
       map((resp) => resp),
       catchError(this.handleError)
+    );
+  }
+  fetchCountryTimeLine(countryName: string) {
+    return this.getCurrentCountryTimelineCases({ country: countryName, status: 'deaths' }).pipe(
+      pluck('All', 'dates'),
+      map(res => {
+        return {
+          deaths: Object.values(res).reverse()
+        }
+      }),
+      mergeMap(case1 => this.getCurrentCountryTimelineCases({ country: countryName, status: 'recovered' }).pipe(
+        pluck('All', 'dates'),
+        map(res => {
+          return {
+            deaths: case1.deaths,
+            recovered: Object.values(res).reverse()
+          }
+        })
+      )),
+      mergeMap(case2 => this.getCurrentCountryTimelineCases({ country: countryName, status: 'confirmed' }).pipe(
+        pluck('All', 'dates'),
+        map(res => {
+          return {
+            name: countryName,
+            updated: Object.keys(res).reverse(),
+            deaths: case2.deaths,
+            recovered: case2.recovered,
+            confirmed: Object.values(res).reverse()
+          }
+        })
+      ))
     );
   }
   getCurrentCases(): Observable<Country[]> {
@@ -47,7 +141,7 @@ export class CoronavirusApiService {
           let ordered: Country = {
             ...country.All,
             name: country.name,
-            province: Object.keys(country).filter(c => c != 'All').map(key => { return { ...country[key], name: key } })
+            province: Object.keys(country).filter(c => c != 'All').map(key => { return { ...country[key], id: country.CountryCode, name: key } })
           };
           return ordered;
         });

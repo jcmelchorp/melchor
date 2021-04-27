@@ -19,6 +19,9 @@ export class CasesDoughnutComponent implements OnInit {
         'rgba(240,240,50,1)',
         'rgba(200,60,60,1)',
         'rgba(60,160,60,1)',
+        'rgb(0, 103, 187)',
+        'rgb(0, 150, 187)',
+        'rgba(60,160,60,1)',
       ],
     },
   ];
