@@ -1,15 +1,13 @@
 .img-flag {
-  width: auto;
-  height: 20px;
+  width: 1.2rem;
+  height: auto;
 }
 .card {
-  width: fit-content;
   background: transparent;
   margin: 0;
+
+  .card-footer,
   .card-header {
-    height: 30px;
-  }
-  .card-footer {
     max-height: fit-content;
   }
 }

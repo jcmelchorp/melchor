@@ -11,9 +11,9 @@ import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, tap, map, pluck, mergeMap, flatMap, switchMap } from 'rxjs/operators';
 
-import { Vaccine } from './../models/coronavirus.model';
+import { Cases, Vaccine } from './../models/coronavirus.model';
 import { Country, CountrySelector } from '../models/coronavirus.model';
-import { CountryInfo, Summary } from '../models/covid.model';
+import { CountryInfo, HistoryData, Summary } from '../models/covid.model';
 
 @Injectable()
 export class CoronavirusApiService {
@@ -27,7 +27,11 @@ export class CoronavirusApiService {
       'Access-Control-Allow-Origin': '*'
     }),
   };
-
+  // History from amcharts example
+  getWorldTimeLine(): Observable<Cases[]> {
+    return this._httpClient.get('https://raw.githubusercontent.com/amcharts/covid-charts/master/data/json/total_timeline.json')
+      .pipe(map(resp => resp as Cases[]));
+  }
   //   COVID19 API
   getCountries(): Observable<CountryInfo[]> {
     const url: string = 'countries/';
@@ -39,13 +43,13 @@ export class CoronavirusApiService {
       catchError(this.handleError)
     );
   }
-  getHistory(slug: string): Observable<History[]> {
+  getHistory(slug: string): Observable<HistoryData[]> {
     const url: string = `total/country/${slug}`;
     return this._httpClient.get(this.COVID19_URL + url, {
       observe: 'body',
     }).pipe(
       retry(3),
-      map((resp) => resp as History[]),
+      map((resp) => resp as HistoryData[]),
       catchError(this.handleError)
     );
   }
@@ -118,7 +122,7 @@ export class CoronavirusApiService {
         map(res => {
           return {
             name: countryName,
-            updated: Object.keys(res).reverse(),
+            date: Object.keys(res).reverse(),
             deaths: case2.deaths,
             recovered: case2.recovered,
             confirmed: Object.values(res).reverse()

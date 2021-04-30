@@ -5,7 +5,7 @@ export interface Summary {
   Countries: CountryData[];
   Message: string;
 }
-export interface History {
+export interface HistoryData {
   Active: number;
   City: string;
   CityCode: string;
@@ -24,7 +24,7 @@ export class CountryData implements CountryInfo, Data {
   id: string;
   name?: string;
   value?: number;
-  history?: History[];
+  history?: HistoryData[];
   Date: string;
   NewConfirmed: number;
   NewDeaths: number;

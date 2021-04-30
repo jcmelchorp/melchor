@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 
-import { faHandHoldingMedical, faHeadSideMask, faHeadSideVirus, faShieldVirus, faSkullCrossbones, faSyringe } from '@fortawesome/free-solid-svg-icons';
+import { faFirstAid, faHandHoldingMedical, faHeadSideMask, faHeadSideVirus, faShieldVirus, faSkullCrossbones, faSyringe } from '@fortawesome/free-solid-svg-icons';
 
 import { Vaccine } from 'src/app/coronavirus/models/coronavirus.model';
 
@@ -15,8 +15,7 @@ import { Country } from './../../models/coronavirus.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CasesCardComponent implements OnChanges {
-  @Input() cases: Country;
-  @Input() vaccine: Vaccine;
+  @Input() country: any
   multiDataSet: MultiDataSet;
   faHeadSideVirus = faHeadSideVirus;
   faSkullCrossbones = faSkullCrossbones;
@@ -24,13 +23,12 @@ export class CasesCardComponent implements OnChanges {
   faSyringe = faSyringe;
   faHandHoldingMedical = faHandHoldingMedical;
   faShieldVirus = faShieldVirus;
+  faFirstAid = faFirstAid;
   constructor() { }
   ngOnInit() {
     const date = new Date().toLocaleDateString();
   }
   ngOnChanges() {
-    const totalData: SingleDataSet = [this.cases.confirmed, this.cases.deaths, this.cases.recovered, this.vaccine.administered, this.vaccine.people_partially_vaccinated, this.vaccine.people_vaccinated];
-    //const newVacc: SingleDataSet = [this.vaccine.administered, this.vaccine.people_partially_vaccinated, this.vaccine.people_vaccinated];
-    //this.multiDataSet = [totalData];
+
   }
 }

@@ -29,10 +29,10 @@ export interface CurrentCountryCases {
 
 }
 export interface Cases {
-  confirmed: number[];
-  deaths: number[];
-  recovered: number[];
-  updated: string[]
+  confirmed: number;
+  deaths: number;
+  recovered: number;
+  date: string
 }
 /**
  * Object response model for API Request to the route /cases
