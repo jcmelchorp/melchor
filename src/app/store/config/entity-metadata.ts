@@ -2,9 +2,11 @@ import { EntityMetadataMap, PropsFilterFnFactory } from "@ngrx/data";
 
 import { Country, Vaccine } from "src/app/coronavirus/models/coronavirus.model";
 import { Coin } from "src/app/cryptocurrency/models/cryptocurrency.model";
+import { FullCountry } from "src/app/coronavirus/models/country.model";
 
 import * as fromCoin from './../coin';
 import * as fromCountry from '../country';
+import * as fromFullCountry from '../full-country';
 import * as fromSummary from '../summary';
 import * as fromVaccine from '../vaccine';
 import { Summary } from './../../coronavirus/models/covid.model';
@@ -27,11 +29,16 @@ export const entityMetadata: EntityMetadataMap = {
   [fromVaccine.entityCollectionName]: {
     entityDispatcherOptions: {},
     selectId: (element: Vaccine) => element.name
+  },
+  [fromFullCountry.entityCollectionName]: {
+    entityDispatcherOptions: {},
+    selectId: (element: FullCountry) => element.name
   }
 }
 export const pluralNames = {
   [fromCoin.entityCollectionName]: fromCoin.pluralizedEntityName,
   [fromCountry.entityCollectionName]: fromCountry.pluralizedEntityName,
+  [fromFullCountry.entityCollectionName]: fromFullCountry.pluralizedEntityName,
   [fromSummary.entityCollectionName]: fromSummary.pluralizedEntityName,
   [fromVaccine.entityCollectionName]: fromVaccine.pluralizedEntityName,
 }

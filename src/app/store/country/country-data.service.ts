@@ -3,12 +3,10 @@ import { Injectable } from '@angular/core';
 
 import { DefaultDataService, HttpUrlGenerator, QueryParams } from '@ngrx/data';
 
-import { Observable, combineLatest, of, merge, from } from 'rxjs';
-import { map, mergeMap, pluck, tap, combineAll, switchMap, concatMap, subscribeOn } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
-import { Summary } from 'src/app/coronavirus/models/covid.model';
 
-import { Cases, Country } from '../../coronavirus/models/coronavirus.model';
+import { Country } from '../../coronavirus/models/coronavirus.model';
 import { CoronavirusApiService } from '../../coronavirus/services/coronavirus-api.service';
 
 import * as fromCountry from '.';

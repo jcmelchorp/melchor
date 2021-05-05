@@ -1,33 +1,33 @@
-<div fxLayout="row" fxLayoutAlign="center center">
-  <div class="view-title">{{ "coronavirus-header-title" | translate }}</div>
-  <!--  <div class="my-4 view-subtitle">{{"coronavirus-header-description" | translate}}</div> -->
-</div>
-<div *ngIf="(countryLoaded$|async) && !(loadingCountry$|async) && (vaccinesLoaded$|async) && !(loadingVaccine$|async)">
-  <div *ngIf="(country$|async) as country">
-    <div class="my-4">
-      <app-cases-card [country]="country">
-        <mat-form-field>
-          <mat-select [(ngModel)]="countryName" (selectionChange)="onChangeSelection($event.value)">
-            <mat-optgroup *ngFor="let continent of continents" [label]="continent.name" [disabled]="continent.disabled">
-              <mat-option *ngFor="let country of continent.countries" [value]="country.name">
-                <img class="mr-2 img-flag" src="assets/flags/{{country.id|lowercase}}.svg" alt="{{country.name}}">
-                {{country.name}}
-              </mat-option>
-            </mat-optgroup>
-          </mat-select>
-        </mat-form-field>
-      </app-cases-card>
+<div *ngIf="!(loading$|async) && (loaded$|async);else spinner">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div class="view-title">{{ "coronavirus-header-title" | translate }}</div>
+  </div>
+  <div class="mt-4" *ngIf="(continents$|async);else spinner">
+    <app-cases-card *ngIf="(fullCountries$|async) &&(country$|async) as country;else spinner" [country]="country">
+      <mat-form-field class="d-flex" appearance="legacy">
+        <mat-select [(ngModel)]="countryName" (selectionChange)="onChangeSelection($event.value)">
+          <mat-optgroup *ngFor="let continent of continents" [label]="continent.name" [disabled]="continent.disabled">
+            <mat-option *ngFor="let country of continent.countries" [value]="country.name">
+              <img class="mr-2 img-flag" src="assets/flags/{{country.id|lowercase}}.svg" alt="{{country.name}}">
+              {{country.name}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>
+    </app-cases-card>
+  </div>
+  <div *ngIf="(worldTimeline|async) as worldTimeline">
+    <div *ngIf="(totalTimeline|async) as totalTimeline">
+      <app-worldmap [totalTimeline]="totalTimeline" [worldTimeline]="worldTimeline"></app-worldmap>
+      <!--  <div *ngIf="totalTimeline && worldTimeline;else spinner"> -->
+      <!-- <div *ngIf="(country$|async) as country;else spinner">
+         <app-world-map *ngIf="country && countries" [countries]="countries" [country]="country"></app-world-map>
+        <app-heat-map [countries]="countries"></app-heat-map>
+      -->
     </div>
   </div>
 </div>
-<div fxLayout="row" fxLayoutAlign="center center"
-  *ngIf="(vaccinesLoaded$ | async) && (summaryLoaded$ | async); else spinner">
-  <div fxFlex *ngIf="!(loadingSummary$ | async) && (summary$ | async) as summary">
-    <!--   <app-global-summary *ngIf="timeLine$ | async as timeLine" [timeLine]="timeLine" [summary]="summary"
-      [vaccine]="vaccines$ | async">
-    </app-global-summary> -->
-  </div>
-</div>
+
 
 <ng-template #spinner>
   <div class="mat-spinner" fxLayout="column" fxLayoutAlign="center center">

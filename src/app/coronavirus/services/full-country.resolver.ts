@@ -4,21 +4,21 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/r
 import { Observable } from 'rxjs';
 import { filter, first, map, tap } from 'rxjs/operators';
 
-import { SummaryEntityService } from 'src/app/store/summary/summary-entity.service';
+import { FullCountryEntityService } from 'src/app/store/full-country/full-country-entity.service';
 
 @Injectable()
-export class SummaryResolver implements Resolve<boolean> {
+export class FullCountryResolver implements Resolve<boolean> {
   constructor(
-    private summaryEntityService: SummaryEntityService) { }
+    private fullCountryEntityService: FullCountryEntityService) { }
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.summaryEntityService.loaded$
+    return this.fullCountryEntityService.loaded$
       .pipe(
         tap(loaded => {
           if (!loaded) {
-            this.summaryEntityService.getAll();
+            this.fullCountryEntityService.getAll();
           }
         }),
         filter(loaded => !!loaded),

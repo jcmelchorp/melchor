@@ -1,3 +1,5 @@
+import { Cases, Province } from "./country.model";
+
 /**
  * Object response model for API Request
  *   https://covid-api.mmediagroup.fr/v1/cases?country=${country}
@@ -22,41 +24,25 @@ export interface CurrentCountryCases {
   long: string,
   history?: Cases;
   vaccine?: any;
+  active?: number;
   confirmed: number;
   deaths: number;
   recovered: number;
   updated: string;
 
 }
-export interface Cases {
-  confirmed: number;
-  deaths: number;
-  recovered: number;
-  date: string
-}
+
 /**
  * Object response model for API Request to the route /cases
  *   https://covid-api.mmediagroup.fr/v1/history?country=${country}&status=${status}
  */
-export interface CountryHistoricalCases {
-  all: CurrentCountryCases
-}
-
 export interface Continent {
   name: string;
   disabled?: boolean;
   countries?: any[];
 }
 
-export interface Province {
-  name: string;
-  lat: string;
-  long: string;
-  confirmed: number;
-  recovered: number;
-  deaths: number;
-  updated: string;
-}
+
 /**  */
 export interface CountrySelector {
   name: string;

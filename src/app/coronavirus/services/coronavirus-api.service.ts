@@ -6,13 +6,16 @@ import countries2 from '@amcharts/amcharts4-geodata/data/countries2';
 
 import { QueryParams } from '@ngrx/data';
 
+import { FullCountry } from 'src/app/coronavirus/models/country.model';
 import { environment } from 'src/environments/environment';
 
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError, tap, map, pluck, mergeMap, flatMap, switchMap } from 'rxjs/operators';
 
-import { Cases, Vaccine } from './../models/coronavirus.model';
+import { Vaccine } from './../models/coronavirus.model';
 import { Country, CountrySelector } from '../models/coronavirus.model';
+import { Province } from './../models/country.model';
+import { Cases } from '../models/country.model';
 import { CountryInfo, HistoryData, Summary } from '../models/covid.model';
 
 @Injectable()
@@ -27,10 +30,60 @@ export class CoronavirusApiService {
       'Access-Control-Allow-Origin': '*'
     }),
   };
+  getFullCountry() {
+    return this.getVaccines().pipe(
+      mergeMap(vaccines => this.getCurrentCases().pipe(
+        map(countries =>
+          vaccines.map(v => {
+            const c = countries.find(c => c.name == v.name);
+            return {
+              id: c ? c.abbreviation : v.abbreviation,
+              area: c ? c.sq_km_area : v.sq_km_area,
+              capital_city: c ? c.capital_city : v.capital_city,
+              continent: c ? c.continent : v.continent,
+              country: c ? c.country : v.country,
+              date: c ? c.updated : v.updated,
+              elevation: c ? c.elevation_in_meters : v.elevation_in_meters,
+              iso: c ? c.iso : v.iso,
+              life_expectancy: c ? c.life_expectancy : v.life_expectancy,
+              lat: c ? c.lat : '',
+              long: c ? c.long : '',
+              location: c ? c.location : v.location,
+              name: c ? c.name : v.name,
+              population: c ? c.population : v.population,
+              province: c ? c.province : [],
+              active: c ? (c.confirmed - c.deaths - c.recovered) : 0,
+              confirmed: c ? c.confirmed : 0,
+              deaths: c ? c.deaths : 0,
+              recovered: c ? c.recovered : 0,
+              administered: v.administered,
+              p_vaccinated: v.people_partially_vaccinated,
+              vaccinated: v.people_vaccinated,
+              history: []
+            }
+          })
+        )
+      )),
+    )
+  }
+
+
+
   // History from amcharts example
-  getWorldTimeLine(): Observable<Cases[]> {
-    return this._httpClient.get('https://raw.githubusercontent.com/amcharts/covid-charts/master/data/json/total_timeline.json')
-      .pipe(map(resp => resp as Cases[]));
+  getWorldTimeLine() {
+    return this._httpClient.get('https://raw.githubusercontent.com/amcharts/covid-charts/master/data/json/world_timeline.json', {
+      observe: 'body',
+    }).pipe(
+      retry(3),
+      map(resp => resp as { date: string, list: { active: number, confirmed: number, deaths: number, recovered: number, id: string }[] }[]));
+
+  }
+  getTotalTimeLine() {
+    return this._httpClient.get('https://raw.githubusercontent.com/amcharts/covid-charts/master/data/json/total_timeline.json', {
+      observe: 'body',
+    }).pipe(
+      retry(3),
+      map(resp => resp as { active: number, date: string, confirmed: number, deaths: number, recovered: number, id: string }[]));
   }
   //   COVID19 API
   getCountries(): Observable<CountryInfo[]> {
@@ -65,27 +118,16 @@ export class CoronavirusApiService {
   }
 
   //   CORONAVIRUS API
-  getVaccines(): Observable<Vaccine[]> {
+  getVaccines(queryParams?: QueryParams): Observable<Vaccine[]> {
     const url: string = 'vaccines/';
     return this._httpClient.get(this.SERVER_URL + url, {
+      params: new HttpParams({ fromObject: queryParams }),
       observe: 'body',
     }).pipe(
       retry(3),
+      map((resp) => Object.keys(resp).map(key => { return { ...resp[key].All, name: key } })),
       //tap(resp => console.log(resp)),
-      map((resp) => {
-        let arr = Object.keys(resp).map(key => { return { ...resp[key], name: key } });
-        let newArr = arr.map(vaccine => {
-          let ordered: Vaccine = {
-            ...vaccine.All,
-            name: vaccine.name,
-            province: Object.keys(vaccine).filter(c => c != 'All').map(key => { return { ...vaccine[key], name: key } })
-          };
-          return ordered;
-        });
-        return newArr;
-      }),
       catchError(this.handleError)
-
     );
   }
   getCurrentCountryTimelineCases(queryParams: QueryParams) {
@@ -95,7 +137,7 @@ export class CoronavirusApiService {
       observe: 'body',
     }).pipe(
       retry(3),
-      tap(resp => console.log(resp)),
+      // tap(resp => console.log(resp)),
       map((resp) => resp),
       catchError(this.handleError)
     );

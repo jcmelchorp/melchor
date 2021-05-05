@@ -6,30 +6,28 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ChartsModule } from 'ng2-charts';
 
-import * as fromCurrentData from '../store/country';
-import * as fromSummary from '../store/summary';
-import * as fromVaccine from '../store/vaccine';
+import * as fromFullCountry from '../store/full-country';
 import * as fromEntity from './../store/config/entity-metadata';
-import { CountryDataService } from '../store/country/country-data.service';
-import { CountryEntityService } from '../store/country/country-entity.service';
-import { SummaryDataService } from '../store/summary/summary-data.service';
-import { SummaryEntityService } from '../store/summary/summary-entity.service';
-import { VaccineDataService } from '../store/vaccine/vaccines-data.service';
-import { VaccineEntityService } from '../store/vaccine/vaccines-entity.service';
+import { FullCountryDataService } from '../store/full-country/full-country-data.service';
+import { FullCountryEntityService } from '../store/full-country/full-country-entity.service';
 
 import { coronavirusComponents } from './components';
 import { CoronavirusRoutingModule } from './coronavirus-routing.module';
 import { CoronavirusComponent } from './coronavirus.component';
 
 import { CoronavirusApiService } from './services/coronavirus-api.service';
-import { CountryResolver } from './services/country.resolver';
-import { SummaryResolver } from './services/summary.resolver';
-import { VaccineResolver } from './services/vaccines.resolver';
+import { FullCountryResolver } from './services/full-country.resolver';
+import { DrillDownComponent } from './components/drill-down/drill-down.component';
+import { HeatMapComponent } from './components/heat-map/heat-map.component';
+import { WorldmapComponent } from './components/worldmap/worldmap.component';
 
 @NgModule({
   declarations: [
     ...coronavirusComponents,
-    CoronavirusComponent
+    CoronavirusComponent,
+    DrillDownComponent,
+    HeatMapComponent,
+    WorldmapComponent,
   ],
   exports: [
     CoronavirusComponent
@@ -41,15 +39,9 @@ import { VaccineResolver } from './services/vaccines.resolver';
   ],
   providers: [
     CoronavirusApiService,
-    CountryResolver,
-    CountryEntityService,
-    CountryDataService,
-    SummaryResolver,
-    SummaryEntityService,
-    SummaryDataService,
-    VaccineResolver,
-    VaccineEntityService,
-    VaccineDataService
+    FullCountryResolver,
+    FullCountryEntityService,
+    FullCountryDataService,
   ]
 })
 export class CoronavirusModule {
@@ -57,18 +49,14 @@ export class CoronavirusModule {
     eds: EntityDefinitionService,
     entityServices: EntityServices,
     entityDataService: EntityDataService,
-    countryEntityService: CountryEntityService,
-    countryDataService: CountryDataService,
-    summaryEntityService: SummaryEntityService,
-    summaryDataService: SummaryDataService,
-    vaccineEntityService: VaccineEntityService,
-    vaccineDataService: VaccineDataService
+    fullCountryEntityService: FullCountryEntityService,
+    fullCountryDataService: FullCountryDataService,
+
   ) {
     eds.registerMetadataMap(fromEntity.entityMetadata);
-    entityServices.registerEntityCollectionServices([countryEntityService, summaryEntityService, vaccineEntityService]);
-    entityDataService.registerService(fromCurrentData.entityCollectionName, countryDataService);
-    entityDataService.registerService(fromSummary.entityCollectionName, summaryDataService);
-    entityDataService.registerService(fromVaccine.entityCollectionName, vaccineDataService);
+    entityServices.registerEntityCollectionServices([fullCountryEntityService]);
+    entityDataService.registerService(fromFullCountry.entityCollectionName, fullCountryDataService);
+
 
 
 

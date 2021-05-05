@@ -1,0 +1,11 @@
+<mat-card *ngIf="data" class="mat-elevation-z0" fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)"
+  fxFlex.lt-sm="100%">
+  <mat-card-header>
+    <fa-icon matCardAvatar class="text-danger fa-icon" size="2x" [icon]="data.icon"></fa-icon>
+    <mat-card-title>
+      {{data.case|number}}&nbsp;
+      <small class="text-danger">{{data.casePerCapita|percent:'.2'}}</small>
+    </mat-card-title>
+    <mat-card-subtitle>{{data.name|number}}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

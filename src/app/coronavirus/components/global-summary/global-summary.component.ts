@@ -12,7 +12,9 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import { max } from 'rxjs/internal/operators/max';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Cases, Vaccine } from '../../models/coronavirus.model';
+import { Vaccine } from '../../models/coronavirus.model';
+import { FullCountry } from './../../models/country.model';
+import { Cases } from '../../models/country.model';
 import { HistoryData } from './../../models/covid.model';
 import { CountryData, Summary } from '../../models/covid.model';
 import { CoronavirusApiService } from './../../services/coronavirus-api.service';
@@ -23,296 +25,17 @@ import { CoronavirusApiService } from './../../services/coronavirus-api.service'
   styleUrls: ['./global-summary.component.scss']
 })
 export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
-  @Input() summary: Summary;
-  @Input() vaccines: Vaccine[];
+  @Input() countries: FullCountry[];
   @Input() timeLine: Cases[];
-
-
-  renameFields(data: CountryData[]): any[] {
-    return data.map(d => {
-      return {
-        uid: d.id,
-        id: d.CountryCode,
-        name: d.Country,
-        value: d.TotalConfirmed,
-        date: d.Date,
-        newConfirmed: d.NewConfirmed,
-        newDeaths: d.NewDeaths,
-        newRecovered: d.NewRecovered,
-        totalConfirmed: d.TotalConfirmed,
-        totalDeaths: d.TotalDeaths,
-        totalRecovered: d.TotalRecovered,
-        country: d.Country,
-        countryCode: d.CountryCode,
-        slug: d.Slug
-      }
-    })
-
-  }
+  @Input() countryStr: string;
 
   ngAfterViewInit() {
     //#region variables
     var perCapita = false;
     var numberFormatter: am4core.NumberFormatter = new am4core.NumberFormatter();
-    var colors = { active: activeColor, confirmed: confirmedColor, recovered: recoveredColor, deaths: deathsColor };
-    var populations = {
-      "AD": "84000",
-      "AE": "4975593",
-      "AF": "29121286",
-      "AG": "86754",
-      "AI": "13254",
-      "AL": "2986952",
-      "AM": "2968000",
-      "AN": "300000",
-      "AO": "13068161",
-      "AQ": "0",
-      "AR": "41343201",
-      "AS": "57881",
-      "AT": "8205000",
-      "AU": "21515754",
-      "AW": "71566",
-      "AX": "26711",
-      "AZ": "8303512",
-      "BA": "4590000",
-      "BB": "285653",
-      "BD": "156118464",
-      "BE": "10403000",
-      "BF": "16241811",
-      "BG": "7148785",
-      "BH": "738004",
-      "BI": "9863117",
-      "BJ": "9056010",
-      "BL": "8450",
-      "BM": "65365",
-      "BN": "395027",
-      "BO": "9947418",
-      "BQ": "18012",
-      "BR": "201103330",
-      "BS": "301790",
-      "BT": "699847",
-      "BV": "0",
-      "BW": "2029307",
-      "BY": "9685000",
-      "BZ": "314522",
-      "CA": "33679000",
-      "CC": "628",
-      "CD": "70916439",
-      "CF": "4844927",
-      "CG": "3039126",
-      "CH": "7581000",
-      "CI": "21058798",
-      "CK": "21388",
-      "CL": "16746491",
-      "CM": "19294149",
-      "CN": "1330044000",
-      "CO": "47790000",
-      "CR": "4516220",
-      "CS": "10829175",
-      "CU": "11423000",
-      "CV": "508659",
-      "CW": "141766",
-      "CX": "1500",
-      "CY": "1102677",
-      "CZ": "10476000",
-      "DE": "81802257",
-      "DJ": "740528",
-      "DK": "5484000",
-      "DM": "72813",
-      "DO": "9823821",
-      "DZ": "34586184",
-      "EC": "14790608",
-      "EE": "1291170",
-      "EG": "80471869",
-      "EH": "273008",
-      "ER": "5792984",
-      "ES": "46505963",
-      "ET": "88013491",
-      "FI": "5244000",
-      "FJ": "875983",
-      "FK": "2638",
-      "FM": "107708",
-      "FO": "48228",
-      "FR": "64768389",
-      "GA": "1545255",
-      "GB": "62348447",
-      "GD": "107818",
-      "GE": "4630000",
-      "GF": "195506",
-      "GG": "65228",
-      "GH": "24339838",
-      "GI": "27884",
-      "GL": "56375",
-      "GM": "1593256",
-      "GN": "10324025",
-      "GP": "443000",
-      "GQ": "1014999",
-      "GR": "11000000",
-      "GS": "30",
-      "GT": "13550440",
-      "GU": "159358",
-      "GW": "1565126",
-      "GY": "748486",
-      "HK": "6898686",
-      "HM": "0",
-      "HN": "7989415",
-      "HR": "4284889",
-      "HT": "9648924",
-      "HU": "9982000",
-      "ID": "242968342",
-      "IE": "4622917",
-      "IL": "7353985",
-      "IM": "75049",
-      "IN": "1173108018",
-      "IO": "4000",
-      "IQ": "29671605",
-      "IR": "76923300",
-      "IS": "308910",
-      "IT": "60340328",
-      "JE": "90812",
-      "JM": "2847232",
-      "JO": "6407085",
-      "JP": "127288000",
-      "KE": "40046566",
-      "KG": "5776500",
-      "KH": "14453680",
-      "KI": "92533",
-      "KM": "773407",
-      "KN": "51134",
-      "KP": "22912177",
-      "KR": "48422644",
-      "KW": "2789132",
-      "KY": "44270",
-      "KZ": "15340000",
-      "LA": "6368162",
-      "LB": "4125247",
-      "LC": "160922",
-      "LI": "35000",
-      "LK": "21513990",
-      "LR": "3685076",
-      "LS": "1919552",
-      "LT": "2944459",
-      "LU": "497538",
-      "LV": "2217969",
-      "LY": "6461454",
-      "MA": "33848242",
-      "MC": "32965",
-      "MD": "4324000",
-      "ME": "666730",
-      "MF": "35925",
-      "MG": "21281844",
-      "MH": "65859",
-      "MK": "2062294",
-      "ML": "13796354",
-      "MM": "53414374",
-      "MN": "3086918",
-      "MO": "449198",
-      "MP": "53883",
-      "MQ": "432900",
-      "MR": "3205060",
-      "MS": "9341",
-      "MT": "403000",
-      "MU": "1294104",
-      "MV": "395650",
-      "MW": "15447500",
-      "MX": "112468855",
-      "MY": "28274729",
-      "MZ": "22061451",
-      "NA": "2128471",
-      "NC": "216494",
-      "NE": "15878271",
-      "NF": "1828",
-      "NG": "154000000",
-      "NI": "5995928",
-      "NL": "16645000",
-      "NO": "5009150",
-      "NP": "28951852",
-      "NR": "10065",
-      "NU": "2166",
-      "NZ": "4252277",
-      "OM": "2967717",
-      "PA": "3410676",
-      "PE": "29907003",
-      "PF": "270485",
-      "PG": "6064515",
-      "PH": "99900177",
-      "PK": "184404791",
-      "PL": "38500000",
-      "PM": "7012",
-      "PN": "46",
-      "PR": "3916632",
-      "PS": "3800000",
-      "PT": "10676000",
-      "PW": "19907",
-      "PY": "6375830",
-      "QA": "840926",
-      "RE": "776948",
-      "RO": "21959278",
-      "RS": "7344847",
-      "RU": "140702000",
-      "RW": "11055976",
-      "SA": "25731776",
-      "SB": "559198",
-      "SC": "88340",
-      "SD": "35000000",
-      "SE": "9828655",
-      "SG": "4701069",
-      "SH": "7460",
-      "SI": "2007000",
-      "SJ": "2550",
-      "SK": "5455000",
-      "SL": "5245695",
-      "SM": "31477",
-      "SN": "12323252",
-      "SO": "10112453",
-      "SR": "492829",
-      "SS": "8260490",
-      "ST": "175808",
-      "SV": "6052064",
-      "SX": "37429",
-      "SY": "22198110",
-      "SZ": "1354051",
-      "TC": "20556",
-      "TD": "10543464",
-      "TF": "140",
-      "TG": "6587239",
-      "TH": "67089500",
-      "TJ": "7487489",
-      "TK": "1466",
-      "TL": "1154625",
-      "TM": "4940916",
-      "TN": "10589025",
-      "TO": "122580",
-      "TR": "77804122",
-      "TT": "1228691",
-      "TV": "10472",
-      "TW": "22894384",
-      "TZ": "41892895",
-      "UA": "45415596",
-      "UG": "33398682",
-      "UM": "0",
-      "US": "310232863",
-      "UY": "3477000",
-      "UZ": "27865738",
-      "VA": "921",
-      "VC": "104217",
-      "VE": "27223228",
-      "VG": "21730",
-      "VI": "108708",
-      "VN": "89571130",
-      "VU": "221552",
-      "WF": "16025",
-      "WS": "192001",
-      "XK": "1800000",
-      "YE": "23495361",
-      "YT": "159042",
-      "ZA": "49000000",
-      "ZM": "13460305",
-      "ZW": "13061000"
-    }
-
     var activeColor: am4core.Color = am4core.color("#0a0acc");
     var activeCountryColor: am4core.Color = am4core.color("#367B25");
-    var backgroundColor: am4core.Color = am4core.color("#1e2128");
+    var backgroundColor: am4core.Color = am4core.color("#ffffff");
     var confirmedColor: am4core.Color = am4core.color("#faea23");
     var countryColor: am4core.Color = am4core.color("#74B266");
     var countryHoverColor: am4core.Color = am4core.color("#367B25");
@@ -329,9 +52,9 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
     var buttonStrokeColor = am4core.color("#777777");
 
     var currentIndex;
-    var currentCountry = "Global";
+
     // last date of the data
-    var lastDate = new Date(this.summary.Date);
+    var lastDate = new Date();
     var currentDate = lastDate;
     var sliderAnimation;
     var currentPolygon;
@@ -339,6 +62,7 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
     var countryDataTimeout;
 
     var currentType;
+    var currentCountry = this.countryStr;
 
     var currentTypeName;
     var countryIndexMap = {};
@@ -391,8 +115,17 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
     chart.zoomControl.align = "right";
     chart.zoomControl.marginRight = 15;
     chart.zoomControl.valign = "top";
-    chart.homeGeoPoint = { longitude: 0, latitude: -2 };
     chart.background.opacity = 0.5
+    chart.zoomEasing = am4core.ease.sinOut;
+    chart.homeGeoPoint = { longitude: 0, latitude: 0 };
+
+
+    // by default minus button zooms out by one step, but we modify the behavior so when user clicks on minus, the map would fully zoom-out and show world data
+    chart.zoomControl.minusButton.events.on("hit", showWorld);
+    // clicking on a "sea" will also result a full zoom-out
+    chart.seriesContainer.background.events.on("hit", showWorld);
+    chart.seriesContainer.background.events.on("over", resetHover);
+    chart.seriesContainer.background.fillOpacity = 0;
     chart.zoomEasing = am4core.ease.sinOut;
     chart.geodata = am4geodata_ultraWorld;
     chart.geodataNames = am4geodata_lang_ES;
@@ -401,24 +134,11 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
     // instead of Miller, you can use Mercator or many other projections available: https://www.amcharts.com/demos/map-using-d3-projections/
     chart.projection = new am4maps.projections.Miller();
     chart.panBehavior = "move";
-
     // when map is globe, beackground is made visible
     /* chart.backgroundSeries.mapPolygons.template.polygon.fillOpacity = 1;
     chart.backgroundSeries.mapPolygons.template.polygon.fill = am4core.color("rgb(80,80,80)"); */
     // you can have pacific - centered map if you set this to -154.8
     chart.deltaLongitude = -8;
-
-    var title = chart.chartContainer.createChild(am4core.Label);
-    title.paddingTop = 0;
-    title.fontSize = "1.5em";
-    title.text = "COVID-19 Estadística mundial";
-    title.horizontalCenter = "left";
-    title.marginLeft = 20;
-    title.fill = am4core.color("rgb(40,40,40)");
-    title.y = 0;
-    title.align = "center";
-    title.zIndex = 100;
-    // top title
 
     var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
     // this helps to place bubbles in the visual middle of the area
@@ -439,12 +159,12 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
     polygonSeries.dataFields.value = "value";
     // Base colors for custom "heatRules" gradient
 
-    polygonSeries.heatRules.push({
+    /* polygonSeries.heatRules.push({
       max: am4core.color("rgb(218, 185, 0)"),
       min: am4core.color("rgb(255, 255, 255)"),
       property: "fill",
       target: polygonSeries.mapPolygons.template,
-    });
+    }); */
 
 
     polygonSeries.strokeWidth = 0.5;
@@ -467,11 +187,11 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
       maxRange.value = max;
       maxRange.label.text = "" + heatLegend.numberFormatter.format(max);
     });
-    var heatColors = [
-      am4core.color("rgb(248, 227, 211)"),
-      am4core.color("rgb(237, 137, 166)"),
-      am4core.color("rgb(0,0,0)")
-    ];
+    /*  var heatColors = [
+       am4core.color("rgb(248, 227, 211)"),
+       am4core.color("rgb(237, 137, 166)"),
+       am4core.color("rgb(0,0,0)")
+     ]; */
 
     // Let hover state colors be relative to the "heatRule" color
     /* var hoverState = polygonSeries.mapPolygons.template.states.create("hover");
@@ -480,34 +200,34 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
     }); */
 
     // Emulate heatRule but with 2 color ranges instead of 1
-    polygonSeries.mapPolygons.template.adapter.add("fill", (fill, mapPolygon) => {
-      var workingValue = mapPolygon.dataItem.values["value"].workingValue;
-      var minValue = polygonSeries.dataItem.values["value"].low;
-      var maxValue = polygonSeries.dataItem.values["value"].high;
-      var percent = (workingValue - minValue) / (maxValue - minValue);
-      // This may run before workingValue is even a thing. Let's only do our thing
-      // if workingValue and ergo percent are a thing.
-      if (am4core.type.isNumber(percent)) {
-        if (percent > 0.5) {
-          return new am4core.Color(
-            am4core.colors.interpolate(
-              heatColors[1].rgb,
-              heatColors[2].rgb,
-              (percent - 0.5) * 2
-            )
-          );
-        } else {
-          return new am4core.Color(
-            am4core.colors.interpolate(
-              heatColors[0].rgb,
-              heatColors[1].rgb,
-              percent * 2
-            )
-          );
-        }
-      }
-      return fill;
-    });
+    /*  polygonSeries.mapPolygons.template.adapter.add("fill", (fill, mapPolygon) => {
+       var workingValue = mapPolygon.dataItem.values["value"].workingValue;
+       var minValue = polygonSeries.dataItem.values["value"].low;
+       var maxValue = polygonSeries.dataItem.values["value"].high;
+       var percent = (workingValue - minValue) / (maxValue - minValue);
+       // This may run before workingValue is even a thing. Let's only do our thing
+       // if workingValue and ergo percent are a thing.
+       if (am4core.type.isNumber(percent)) {
+         if (percent > 0.5) {
+           return new am4core.Color(
+             am4core.colors.interpolate(
+               heatColors[1].rgb,
+               heatColors[2].rgb,
+               (percent - 0.5) * 2
+             )
+           );
+         } else {
+           return new am4core.Color(
+             am4core.colors.interpolate(
+               heatColors[0].rgb,
+               heatColors[1].rgb,
+               percent * 2
+             )
+           );
+         }
+       }
+       return fill;
+     }); */
     var heatLegend = chart.createChild(am4maps.HeatLegend);
     heatLegend.id = "heatLegend";
     heatLegend.series = polygonSeries;
@@ -515,8 +235,8 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
     heatLegend.align = "center";
     heatLegend.valign = "bottom";
     heatLegend.marginRight = am4core.percent(4);
-    heatLegend.background.fill = am4core.color("#000");
-    heatLegend.background.fillOpacity = 0.5;
+    /* heatLegend.background.fill = am4core.color("#000");
+    heatLegend.background.fillOpacity = 0.5; */
     heatLegend.padding(5, 5, 5, 5);
 
     // Blank out internal heat legend value axis labels
@@ -537,15 +257,15 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
     maxRange.label.text = "More";
     // Blank out internal heat legend value axis labels
     heatLegend.valueAxis.renderer.labels.template.adapter.add("text", (labelText) => {
-      return '';
+      return "";
     });
 
     // Allow the heatLegend to function in general
-    heatLegend.minColor = heatColors[0];
+    /* heatLegend.minColor = heatColors[0];
     heatLegend.maxColor = heatColors[2];
-
+ */
     // Override heatLegend gradient
-    var gradient = new am4core.LinearGradient();
+    /* var gradient = new am4core.LinearGradient();
     heatColors.forEach((color) => {
       gradient.addColor(color);
     });
@@ -556,7 +276,7 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
     heatLegend.markers.template.events.on("sizechanged", (event) => {
       event.target.fill = event.target.fill;
     })
-
+ */
 
     // switch between map and globe
     var mapGlobeSwitch = chart.createChild(am4core.SwitchButton);
@@ -581,14 +301,16 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
       }
     })
 
-    /* polygonSeries.mapPolygons.template.events.on("over", event => {
-      handleHover(event.target);
-    });
-*/
-    polygonSeries.mapPolygons.template.events.on("hit", event => {
-      handleHover(event.target);
-    });
-    polygonSeries.data = JSON.parse(JSON.stringify(this.renameFields(this.summary.Countries)));
+    /*  polygonSeries.mapPolygons.template.events.on("over", event => {
+       handleHover(event.target);
+     });
+
+     polygonSeries.mapPolygons.template.events.on("hit", event => {
+       handleHover(event.target);
+     }); */
+
+    console.log(JSON.parse(JSON.stringify(this.countries)))
+    polygonSeries.data = JSON.parse(JSON.stringify(this.countries));
 
     function handleHover(mapPolygon) {
       if (!isNaN(mapPolygon.dataItem.value)) {
@@ -597,14 +319,57 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
         heatLegend.valueAxis.hideTooltip();
       }
     }
-    /*  // polygon states
-     var polygonHoverState = polygonSeries.states.create("hover");
-     polygonHoverState.transitionDuration = 1400;
-     polygonHoverState.properties.fill = countryHoverColor;
+    var lastSelected;
+    polygonTemplate.events.on("hit", function (ev) {
+      if (lastSelected) {
+        // This line serves multiple purposes:
+        // 1. Clicking a country twice actually de-activates, the line below
+        //    de-activates it in advance, so the toggle then re-activates, making it
+        //    appear as if it was never de-activated to begin with.
+        // 2. Previously activated countries should be de-activated.
+        lastSelected.isActive = false;
+      }
+      ev.target.series.chart.zoomToMapObject(ev.target);
+      if (lastSelected !== ev.target) {
+        lastSelected = ev.target;
+      }
+    })
 
-     var polygonActiveState = polygonSeries.states.create("active")
-     polygonActiveState.properties.fill = activeCountryColor; */
-    // Set up heat legend
+
+    /* Create selected and hover states and set alternative fill color */
+    var ss = polygonTemplate.states.create("active");
+    ss.properties.fill = chart.colors.getIndex(2);
+
+    var hs = polygonTemplate.states.create("hover");
+    hs.properties.fill = chart.colors.getIndex(4);
+
+    // Hide Antarctica
+    polygonSeries.exclude = ["AQ"];
+
+    // Small map
+    chart.smallMap = new am4maps.SmallMap();
+    // Re-position to top right (it defaults to bottom left)
+    chart.smallMap.align = "right";
+    chart.smallMap.valign = "top";
+    chart.smallMap.series.push(polygonSeries);
+
+    // Zoom control
+    chart.zoomControl = new am4maps.ZoomControl();
+
+    var homeButton = new am4core.Button();
+    homeButton.events.on("hit", function () {
+      chart.goHome();
+    });
+
+    homeButton.icon = new am4core.Sprite();
+    homeButton.padding(7, 5, 7, 5);
+    homeButton.width = 30;
+    homeButton.icon.path = "M16,8 L14,8 L14,16 L10,16 L10,10 L6,10 L6,16 L2,16 L2,8 L0,8 L8,0 L16,8 Z M16,8";
+    homeButton.marginBottom = 10;
+    homeButton.parent = chart.zoomControl;
+    homeButton.insertBefore(chart.zoomControl.plusButton);
+
+
 
 
 
@@ -627,7 +392,7 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
 
     // Bubble series
     var bubbleSeries = chart.series.push(new am4maps.MapImageSeries());
-    bubbleSeries.data = JSON.parse(JSON.stringify(this.renameFields(this.summary.Countries)));
+    bubbleSeries.data = JSON.parse(JSON.stringify(this.countries));
 
     bubbleSeries.dataFields.value = "value";
     bubbleSeries.dataFields.id = "id";
@@ -677,7 +442,7 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
       property: "radius",
       min: 3,
       max: 30,
-      dataField: "value"
+      dataField: currentType
     })
 
     // when data items validated, hide 0 value bubbles (because min size is set)
@@ -754,7 +519,7 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
         polygonSeries.interpolationDuration = 0;
         bubbleSeries.interpolationDuration = 1000;
         bubbleSeries.show();
-        polygonSeries.heatRules.getIndex(0).max = countryColor;
+        polygonSeries.heatRules.getIndex(0).max = colors[currentType];
         polygonSeries.mapPolygons.template.tooltipText = undefined;
         /* sizeSlider.show()
         filterSlider.show();
@@ -900,9 +665,9 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
         clearTimeout(countryDataTimeout);
       }
       // we delay change of data for better performance (so that data is not changed whil zooming)
-      /*  countryDataTimeout = setTimeout(function () {
-         setCountryData(countryIndex);
-       }, 1000); // you can adjust number, 1000 is one second */
+      /* countryDataTimeout = setTimeout(function () {
+        setCountryData(countryIndex);
+      }, 1000); */ // you can adjust number, 1000 is one second
 
       //updateTotals(currentIndex);
       updateCountryName();
@@ -1513,7 +1278,7 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
     label.align = "right";
     label.horizontalCenter = "right";
     label.verticalCenter = "bottom";
-*/
+    */
     // buttons & chart container
     var buttonsAndChartContainer = container.createChild(am4core.Container);
     buttonsAndChartContainer.layout = "vertical";
@@ -1618,11 +1383,10 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
 
       // change color of bubbles
       // setting colors on mapImage for tooltip colors
-      /* polygonSeries.mapPolygons.template.fill = colors[name];
-      polygonSeries.mapPolygons.template.stroke = colors[name]; */
-      // first child is circle
-      /* polygonSeries.mapPolygons.template.children.getIndex(0).fill = colors[name]; */
-
+      //polygonSeries.mapPolygons.template.fill = colors[name];
+      //polygonSeries.mapPolygons.template.stroke = colors[name];
+      // first child is circl
+      //polygonSeries.mapPolygons.template.children.getIndex(0).fill = colors[name];
       polygonSeries.heatRules.push({
         max: colors[name],
         min: am4core.color("rgb(255, 255, 255)"),
@@ -1654,7 +1418,7 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
           }
         }
       }
-*/
+    */
       // update heat rule's maxValue
       polygonSeries.heatRules.getIndex(0).maxValue = max[currentType];
       bubbleSeries.heatRules.getIndex(0).maxValue = maxPC[currentType];
@@ -1689,7 +1453,7 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
                   currentIndex = index;
                 }
               }
-   */
+    */
 
 
 
@@ -1711,7 +1475,7 @@ export class GlobalSummaryComponent implements AfterViewInit, OnDestroy {
         var polygon = polygonSeries.getPolygonById(di.id);
 
         if (image) {
-          var population = Number(populations[image.dataItem.dataContext['id']]);
+          var population = Number(image.dataItem.dataContext['population']);
 
           image.dataItem.dataContext['confirmed'] = di.confirmed;
           image.dataItem.dataContext['deaths'] = di.deaths;

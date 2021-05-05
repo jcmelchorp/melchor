@@ -1,12 +1,7 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, OnChanges } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 
 import { faFirstAid, faHandHoldingMedical, faHeadSideMask, faHeadSideVirus, faShieldVirus, faSkullCrossbones, faSyringe } from '@fortawesome/free-solid-svg-icons';
 
-import { Vaccine } from 'src/app/coronavirus/models/coronavirus.model';
-
-import { MultiDataSet, SingleDataSet } from 'ng2-charts';
-
-import { Country } from './../../models/coronavirus.model';
 
 @Component({
   selector: 'app-cases-card',
@@ -16,7 +11,7 @@ import { Country } from './../../models/coronavirus.model';
 })
 export class CasesCardComponent implements OnChanges {
   @Input() country: any
-  multiDataSet: MultiDataSet;
+  cases: any[];
   faHeadSideVirus = faHeadSideVirus;
   faSkullCrossbones = faSkullCrossbones;
   faHeadSideMask = faHeadSideMask;
@@ -24,11 +19,52 @@ export class CasesCardComponent implements OnChanges {
   faHandHoldingMedical = faHandHoldingMedical;
   faShieldVirus = faShieldVirus;
   faFirstAid = faFirstAid;
-  constructor() { }
-  ngOnInit() {
-    const date = new Date().toLocaleDateString();
-  }
-  ngOnChanges() {
 
+  makeCards(country) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    /*  this.cases = [{
+       name: 'Confirmados',
+       case: changes.confirmed.currentValue,
+       icon: faHeadSideVirus,
+       color: 'warning',
+       casePerCapita: changes.confirmed.currentValue / changes.population.currentValue * 100,
+     },
+     {
+       name: 'Muertes',
+       case: changes.deaths.currentValue,
+       icon: faSkullCrossbones,
+       color: 'danger',
+       casePerCapita: changes.deaths.currentValue / changes.population.currentValue * 100,
+     },
+     {
+       name: 'Recuperados',
+       case: changes.recovered.currentValue,
+       icon: faHeadSideMask,
+       color: 'success',
+       casePerCapita: changes.recovered.currentValue / changes.population.currentValue * 100,
+     },
+     {
+       name: 'Administradas',
+       case: changes.administered.currentValue,
+       icon: faHandHoldingMedical,
+       color: 'secondary',
+       casePerCapita: changes.administered.currentValue / changes.population.currentValue * 100,
+     },
+     {
+       name: 'Parcialmente vacunados',
+       case: changes.p_vaccinated.currentValue,
+       icon: faSyringe,
+       casePerCapita: changes.p_vaccinated.currentValue / changes.population.currentValue * 100,
+     },
+     {
+       name: 'Vacunados',
+       case: changes.vaccinated.currentValue,
+       icon: faShieldVirus,
+       color: 'success',
+       casePerCapita: changes.vaccinated.currentValue / changes.population.currentValue * 100,
+     }
+     ] */
   }
+
 }
