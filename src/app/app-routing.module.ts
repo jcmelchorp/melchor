@@ -17,10 +17,12 @@ const routes: Routes = [{
     { path: 'crypto', loadChildren: () => import('./cryptocurrency/cryptocurrency.module').then(m => m.CryptocurrencyModule), data: { breadcrumb: null, title: 'Cryptocurrency' } },
     { path: 'periodic-table', loadChildren: () => import('./periodic-table/periodic-table.module').then(m => m.PeriodicTableModule), data: { breadcrumb: null, title: 'Periodic Table' } },
     { path: 'coronavirus', loadChildren: () => import('./coronavirus/coronavirus.module').then(m => m.CoronavirusModule), data: { breadcrumb: null, title: 'Coronavirus' } },
+    { path: 'catch-the-cat', loadChildren: () => import('./catch-the-cat/catch-the-cat.module').then(m => m.CatchTheCatModule) },
 
   ],
 },
   { path: 'canvas', loadChildren: () => import('./canvas/canvas.module').then(m => m.CanvasModule) },
+  { path: 'catch-the-cat', loadChildren: () => import('./catch-the-cat/catch-the-cat.module').then(m => m.CatchTheCatModule) },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

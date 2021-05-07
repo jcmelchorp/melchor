@@ -15,11 +15,18 @@
           <mat-icon matListIcon>coronavirus</mat-icon>
           <span matLine>Coronavirus</span>
         </mat-list-item>
+
         <h3 matSubheader>Science</h3>
         <mat-list-item [routerLink]="['/periodic-table']" (click)="isHandset?toggleSidenavLeft($event):null"
           routerLinkActive="active">
           <mat-icon matListIcon>science</mat-icon>
           <span matLine>Periodic Table</span>
+        </mat-list-item>
+        <h3 matSubheader>Games</h3>
+        <mat-list-item [routerLink]="['/catch-the-cat']" (click)="isHandset?toggleSidenavLeft($event):null"
+          routerLinkActive="active">
+          <fa-icon [icon]="faCat" matListIcon>cat</fa-icon>
+          <span matLine>Catch the Cat</span>
         </mat-list-item>
         <!--   -->
       </mat-nav-list>

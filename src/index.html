@@ -12,6 +12,23 @@
 <body class="mat-typography">
   <app-root></app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
+  <script src="assets/game/phaser.min.js"></script>
+  <script src="assets/game/catch-the-cat.js"></script>
+  <script>
+    function start() {
+      console.log('adentro!');
+      window.CatchTheCatGame = new CatchTheCatGame({
+        w: 20,
+        h: 20,
+        r: 12,
+        backgroundColor: 0xfafafa,
+        parent: 'catch-the-cat',
+        statusBarAlign: 'center',
+        credit: '2020 © Julio Melchor'
+      });
+    };
+  </script>
+
 </body>
 
 </html>
