@@ -5,12 +5,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateModule } from '@ngx-translate/core';
 
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+
 import { ChartsModule } from 'ng2-charts';
 
 import { appearanceModules } from '../material';
 
 import { sharedComponents } from './components';
 import { sharedServices } from './services';
+import { OnFireComponent } from './components/on-fire/on-fire.component';
 
 export const sharedModules: any[] = [
   CommonModule,
@@ -19,6 +22,7 @@ export const sharedModules: any[] = [
   FormsModule,
   ReactiveFormsModule,
   ChartsModule,
+  CarouselModule
 ];
 @NgModule({
   imports: [
@@ -28,8 +32,9 @@ export const sharedModules: any[] = [
   exports: [
     ...sharedModules,
     ...sharedComponents,
+    ...appearanceModules,
   ],
-  declarations: [...sharedComponents],
+  declarations: [...sharedComponents, OnFireComponent],
   providers: [...sharedServices]
 })
 export class SharedModule {

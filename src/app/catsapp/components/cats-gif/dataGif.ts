@@ -1,0 +1,43 @@
+import { Images } from './images';
+
+export interface DataGif {
+    bitly_gif_url: string;
+    bitly_url: string;
+    caption: string;
+    content_url: string;
+    embed_url: string;
+    fixed_height_downsampled_height: string;
+    fixed_height_downsampled_url: string;
+    fixed_height_downsampled_width: string;
+    fixed_height_small_height: string;
+    fixed_height_small_still_url: string;
+    fixed_height_small_url: string;
+    fixed_height_small_width: string;
+    fixed_width_downsampled_height: string;
+    fixed_width_downsampled_url: string;
+    fixed_width_downsampled_width: string;
+    fixed_width_small_height: string;
+    fixed_width_small_still_url: string;
+    fixed_width_small_url: string;
+    fixed_width_small_width: string;
+    id: string;
+    image_frames: string;
+    image_height: string;
+    image_mp4_url: string;
+    image_original_url: string;
+    image_url: string;
+    image_width: string;
+    images: Images;
+    import_datetime: string;
+    is_sticker: string;
+    rating: string;
+    slug: string;
+    source: string;
+    source_post_url: string;
+    source_tld: string;
+    title: string;
+    trending_datetime: string;
+    type: string;
+    url: string;
+    username: string;
+}

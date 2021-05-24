@@ -1,0 +1,12 @@
+.cat-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+.fix-top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.catsapp {
+  font-family: "Love Ya Like A Sister";
+}

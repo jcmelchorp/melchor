@@ -13,7 +13,7 @@ export const reducers: ActionReducerMap<AppState> = {
 
 export const metaReducers: MetaReducer<AppState>[] = !environment.production
   ? [debug, /* logout */]
-  : [/* clearState */];
+  : [];
 
 export function debug(
   reducer: ActionReducer<AppState>
@@ -38,6 +38,6 @@ export function debug(
     }
     return reducer(state, action);
   };
-} */
-
+}
+ */
 

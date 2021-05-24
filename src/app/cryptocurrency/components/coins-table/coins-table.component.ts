@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -32,14 +32,13 @@ export class CoinsTableComponent implements OnInit, AfterViewInit {
   loaded$: Observable<boolean>;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   /**Price	Market Cap	VWAP (24Hr)	Supply	Volume (24Hr)	Change (24Hr)	Trade */
-  displayedColumns = ['rank', 'select', 'name', 'priceUsd', 'marketCapUsd', 'supply', 'maxSupply', 'vwap24Hr', 'changePercent24Hr'];
+  displayedColumns = ['rank', 'select', 'name', 'priceUsd', /* 'marketCapUsd', 'supply', 'maxSupply', */ 'vwap24Hr', 'changePercent24Hr'];
   /* const initialSelection = [];
   const allowMultiSelect = true; */
   selection = new SelectionModel<Coin>(true, []);
   /** filter params */
   nameFilter = new FormControl('');
   symbolFilter = new FormControl('');
-
   filterValues: any = {
     name: '',
     symbol: ''
@@ -94,6 +93,8 @@ export class CoinsTableComponent implements OnInit, AfterViewInit {
 
   compareMany(selection: SelectionModel<Coin>) {
     const dialogRef = this.dialog.open(CoinsCompareComponent, {
+      hasBackdrop: true,
+      width: 'auto',
       data: { selected: selection.selected as Coin[] }
     });
   }

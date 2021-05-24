@@ -1,0 +1,26 @@
+<mat-toolbar>
+  <mat-toolbar-row fxLayoutAlign="space-between center">
+    <div fxLayout="row">
+      <button mat-button class="brand" [routerLink]="['/']">
+        <fa-icon [icon]="cat"></fa-icon>&nbsp;Catsapp
+      </button>
+      <!--buttons disappear on Xs devices-->
+      <div *ngIf="!isHandset" fxLayout="row">
+        <button mat-button [routerLink]="['breeds']">List</button>
+        <button mat-button [routerLink]="['gif']">Roulette</button>
+        <button mat-button [routerLink]="['game']">Game</button>
+      </div>
+      <!---->
+    </div>
+    <div fxLayout="row">
+
+    </div>
+  </mat-toolbar-row>
+  <!--mat-toolbar-row displayed on Xs devices-->
+  <mat-toolbar-row *ngIf="isHandset" fxLayoutAlign="space-between center">
+    <button mat-button [routerLink]="['breeds']">List</button>
+    <button mat-button [routerLink]="['gif']">Roulette</button>
+    <button mat-button [routerLink]="['game']">Game</button>
+  </mat-toolbar-row>
+  <!---->
+</mat-toolbar>

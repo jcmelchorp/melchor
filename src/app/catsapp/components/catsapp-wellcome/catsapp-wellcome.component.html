@@ -1,0 +1,53 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div class="view-title">CatsApp</div>
+</div>
+
+<div class="p-4">
+  <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="10px" fxLayoutAlign="flex-start">
+    <mat-card class="mb-2" fxFlex="0 1 calc(33.3% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%">
+      <mat-card-header fxLayoutAlign="space-between center">
+        <mat-card-actions>
+          <button mat-icon-button [routerLink]="['breeds']">
+            <fa-icon [icon]="link"></fa-icon>
+          </button>
+        </mat-card-actions>
+        <mat-card-title>
+          Cat List
+        </mat-card-title>
+        <mat-card-subtitle>Lista con las razas de gatos reconocidas</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card [class.mat-elevation-z6]="true" class="mb-2" fxFlex="0 1 calc(33.3% - 10px)"
+      fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%">
+      <mat-card-header fxLayoutAlign="space-between center">
+        <mat-card-actions>
+          <button mat-icon-button [routerLink]="['gif']">
+            <fa-icon [icon]="link"></fa-icon>
+          </button>
+        </mat-card-actions>
+        <mat-card-title>
+          Cat Roulette
+        </mat-card-title>
+        <mat-card-subtitle>
+          Remain hypnotizide by self-exposed cat's gif and shared with your grandma.
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card [class.mat-elevation-z6]="true" class="mb-2" fxFlex="0 1 calc(33.3% - 10px)"
+      fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%">
+      <mat-card-header fxLayoutAlign="space-between center">
+        <mat-card-actions>
+          <button mat-icon-button [routerLink]="['game']">
+            <fa-icon [icon]="link"></fa-icon>
+          </button>
+        </mat-card-actions>
+        <mat-card-title>
+          Cat Game
+        </mat-card-title>
+        <mat-card-subtitle>
+          Spec<span class="catsapp">tac</span>ular 2D game for catching the cat.
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+@import "./../../../../assets/theme/variables";
+:host {
+  flex: 0 0 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+$margin-size: 6px;
+$padding-size: 10px;
+
+@mixin metal-title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.selection-bar {
+  .other,
+  .metal-container,
+  .nonmetal-container {
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 3px;
+
+    p {
+      &.title {
+        @include metal-title();
+      }
+    }
+
+    div {
+      display: flex;
+      justify-content: center;
+
+      span {
+        &.title-underline {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    .buttons {
+      margin: 0;
+      display: flex;
+
+      button {
+        margin: $margin-size $margin-size 0 0;
+        padding: 0;
+        cursor: pointer;
+
+        &.selected {
+          //border: 1px solid $thick-border-color;
+        }
+
+        &.gray {
+          background: $gray;
+        }
+
+        > span {
+          font-size: 0.7rem;
+          //writing-mode: vertical-rl;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      button:last-child {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      button span {
+        font-size: 0.7em;
+        //writing-mode: vertical-rl;
+      }
+    }
+  }
+}

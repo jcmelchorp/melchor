@@ -1,0 +1,53 @@
+<div class="py-5 text-center">
+    <label class="display-4">Cat's breed table data</label>
+    <p class="mat-h1">This is a subtitle of the contact page.</p>
+</div>
+<div class="py-5 pl-5 pr-5">
+    <mat-card [class.mat-elevation-z8]="true">
+        <mat-card-header>
+            <mat-card-title>
+                All the cats breeds
+            </mat-card-title>
+            <mat-card-subtitle>
+                Click on column name for sorting
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <table mat-table class="full-width-table" matSort aria-label="Elements">
+                <!-- Id Column -->
+                <ng-container matColumnDef="breed">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Breed</th>
+                    <td mat-cell *matCellDef="let row">{{row.breed}}</td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="country">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
+                    <td mat-cell *matCellDef="let row">{{row.country}}</td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="origin">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Origin</th>
+                    <td mat-cell *matCellDef="let row">{{row.origin}}</td>
+                </ng-container>
+                <!-- Name Column -->
+                <!-- <ng-container matColumnDef="coat">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Coat</th>
+                    <td mat-cell *matCellDef="let row">{{row.coat}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="pattern">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Pattern</th>
+                    <td mat-cell *matCellDef="let row">{{row.pattern}}</td>
+                </ng-container> -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator #paginator [length]="98" [pageIndex]="0" [pageSize]="10"
+                [pageSizeOptions]="[25, 50, 100, 250]">
+            </mat-paginator>
+        </mat-card-content>
+    </mat-card>
+</div>

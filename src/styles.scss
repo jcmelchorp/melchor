@@ -1,4 +1,5 @@
-@import "assets/theme/custom-theme.scss";
+@import "assets/theme/scholar-theme.scss";
+@import "assets/theme/variables";
 @import "assets/theme/colors";
 html,
 body {
@@ -6,28 +7,77 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .app-name {
   font-family: "Modak", cursive;
   font-size: 3rem;
-  text-shadow: -2px 2px 2px rgb(160, 160, 160);
+  text-shadow: -2px 2px 2px $text-shadow-color;
   color: $orange-color;
 }
+.module-name {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 3rem;
+  text-shadow: -2px 2px 2px $text-shadow-color;
+  color: $heading-color;
+}
 .view-title {
-  color: $bg-main;
+  color: $success-color;
   font-size: calc(2rem + 1.5vw);
   font-weight: 800;
   font-family: "fredoka one", cursive;
-  text-shadow: -3px -2px 1px $text-shadow-color;
+  text-shadow: -2px -1px 1px $text-shadow-color;
 }
 .view-subtitle {
-  font-family: "comfortaa";
+  //font-family: "comfortaa";
   font-size: calc(0.8rem + 1vw);
   font-weight: 400;
 }
 .head-component {
   font-family: "Love Ya Like A Sister";
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.alkali-metal {
+  background: #6677d8bb;
+}
+
+.alkaline-earth-metal {
+  background: #f9bb00;
+}
+
+.lanthanide {
+  background: #f1af2b7a;
+}
+
+.actinide {
+  background: #4fb37a96;
+}
+
+.transition-metal {
+  background: #0089ce7c;
+}
+
+.post-transition-metal {
+  background: #f71c1ca6;
+}
+
+.metalloid {
+  background: #ff5900b6;
+}
+
+.nonmetal {
+  background: #607e1aaf;
+}
+
+.noble-gas {
+  background: #e674c3b9;
+}
+
+.unknown-metal {
+  background: #997a7a50;
 }
 /* class to avoid text selection*/
 .no-copy {

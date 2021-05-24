@@ -1,5 +1,9 @@
 {
-  "app-name": "Melchor",
+  "app-name": "M",
+  "cat-header-title": "Se escapa el gato!",
+  "coronavirus-header-title": "Coronavirus MX",
+  "coronavirus-header-description": "Información sobre la pandemia causada por el nuevo coronavirus SARS-CoV2",
+  "coronavirus-about-message": "Coronavirus-mx es una aplicación independiente diseñada para accedes fácilemnte a la información más relevante sobre la pandemia causada por el nuevo coronavirus SARS-CoV2, con especial atención a la República Mexicana.",
   "language-es-name": "Español",
   "language-en-name": "Inglés",
   "home": "Inicio",
@@ -18,5 +22,11 @@
   "settings-header-title": "Ajustes de la app",
   "settings-header-description": "Controla el aspecto",
   "theme-header-title": "Luces",
-  "language-header-title": "Idioma"
+  "language-header-title": "Idioma",
+  "statistics-module-name": "Estadísticas",
+  "statistics-current-route-name": "Datos actuales",
+  "statistics-historical-route-name": "Histórico",
+  "modeling-module-name": "Modelo SIR",
+  "modeling-sirmodel-route-name": "Modelo SIR",
+  "information-module-name": "Información"
 }

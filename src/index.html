@@ -6,13 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="manifest" href="manifest.webmanifest">
 </head>
 
 <body class="mat-typography">
   <app-root></app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
+  <script src="assets/game/phaser.min.js"></script>
+  <script src="assets/game/catch-the-cat.js"></script>
+  <script>
+    function start() {
+      console.log('adentro!');
+      window.CatchTheCatGame = new CatchTheCatGame({
+        w: 20,
+        h: 20,
+        r: 12,
+        backgroundColor: 0xfafafa,
+        parent: 'catch-the-cat',
+        statusBarAlign: 'center',
+        credit: '2020 © Julio Melchor'
+      });
+    };
+  </script>
+
 </body>
 
 </html>

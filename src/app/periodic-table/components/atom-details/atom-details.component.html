@@ -1,0 +1,19 @@
+<div *ngIf="data" fxLayout="row wrap" fxLayoutAlign="space-between" class="atom-container {{data.category}}">
+  <div fxLayout="column" fxLayoutAlign="start">
+    <div class="number">{{ data.number }}</div>
+    <div class="symbol" [ngClass]="phaseClass">{{ data.symbol }}</div>
+    <div class="name">{{ data.name }}</div>
+    <div class="mass" fxHide.lt-md>{{ data.atomic_mass }} U.M.A.</div>
+    <!--     <p class="elect-config">{{data.electron_configuration_semantic}}</p>
+ -->
+    <!--     <p class="author">{{data.discovered_by}}</p>
+ -->
+    <div *ngIf="data.melt" fxHide.lt-md class="temp">Fusión:&nbsp;{{data.melt}} K</div>
+    <div *ngIf="data.boil" fxHide.lt-md class="temp">Ebullición:&nbsp;{{data.boil}} K</div>
+
+
+  </div>
+  <div class="text-right" fxHide.lt-lg fxLayout="column" fxLayoutAlign="start end">
+    <p *ngFor="let s of data.shells">{{ s }}</p>
+  </div>
+</div>

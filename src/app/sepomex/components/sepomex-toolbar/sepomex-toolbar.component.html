@@ -1,0 +1,20 @@
+<mat-toolbar>
+  <mat-toolbar-row fxLayoutAlign="space-between center">
+    <button mat-button [routerLink]="['/sepomex']">
+      Localidades de México
+    </button>
+    <!--buttons disappear on small devices-->
+    <div *ngIf="!isHandset" fxLayout="row">
+      <button mat-button [routerLink]="['postal-codes']">Códigos Postales</button>
+      <button mat-button [routerLink]="['cities']">Ciudades</button>
+      <button mat-button [routerLink]="['municipalities']">Municipios</button>
+    </div>
+  </mat-toolbar-row>
+  <!--mat-toolbar-row displayed on small devices-->
+  <mat-toolbar-row *ngIf="isHandset" fxLayoutAlign="space-between center">
+    <button mat-button [routerLink]="['postal-codes']">Códigos Postales</button>
+    <button mat-button [routerLink]="['cities']">Ciudades</button>
+    <button mat-button [routerLink]="['municipalities']">Municipios</button>
+  </mat-toolbar-row>
+  <!---->
+</mat-toolbar>

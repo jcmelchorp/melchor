@@ -1,0 +1,9 @@
+<div class="modal-content" #modalContent>
+  <div class="close-modal" #closeModalDiv>
+    <p class="close-icon" (click)="closeModal.emit()">X</p>
+  </div>
+  <iframe [src]="url" #iframe></iframe>
+  <div class="loader" #loader>
+    <p class="text">Loading Content...</p>
+  </div>
+</div>

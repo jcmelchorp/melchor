@@ -6,10 +6,9 @@ export const sharedServices: any[] = [
   SeoService,
   SnackService,
   ToastService,
-  SubscriptionService
+  SubscriptionService,
 ];
 export * from './seo.service';
 export * from './snack.service';
 export * from './toast.service';
 export * from './subscription.service';
-

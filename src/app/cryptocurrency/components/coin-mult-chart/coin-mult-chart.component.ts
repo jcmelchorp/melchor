@@ -18,10 +18,11 @@ import pluginDataLabels from 'chartjs-plugin-datalabels';
 export class CoinMultChartComponent implements OnInit {
   @Input() chartData: ChartDataSets[];
   @Input() chartLabels: Label[];
-  public lineChartData: ChartDataSets[];
-  public lineChartLabels: Label[]
+  @Input() lineChartData: ChartDataSets[];
+  @Input() lineChartLabels: Label[]
   public lineChartOptions: (ChartOptions & { annotation: any } & { interaction: any }) = {
     responsive: true,
+    aspectRatio: 2,
     scales: {
       xAxes: [{
         distribution: 'series',
@@ -148,8 +149,8 @@ export class CoinMultChartComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.lineChartData = this.chartData;
-    this.lineChartLabels = this.chartLabels;
+    /* this.lineChartData = this.chartData;
+    this.lineChartLabels = this.chartLabels; */
   }
 
 }

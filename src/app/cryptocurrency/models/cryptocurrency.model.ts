@@ -18,3 +18,5 @@ export interface CoinHistoryData {
   priceUsd: string;
   time: number;
 }
+
+
