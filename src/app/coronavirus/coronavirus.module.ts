@@ -17,20 +17,12 @@ import { CoronavirusComponent } from './coronavirus.component';
 
 import { CoronavirusApiService } from './services/coronavirus-api.service';
 import { FullCountryResolver } from './services/full-country.resolver';
-import { DrillDownComponent } from './components/drill-down/drill-down.component';
-import { HeatMapComponent } from './components/heat-map/heat-map.component';
-import { WorldmapComponent } from './components/worldmap/worldmap.component';
 
 @NgModule({
   declarations: [
     ...coronavirusComponents,
     CoronavirusComponent,
-    DrillDownComponent,
-    HeatMapComponent,
-    WorldmapComponent,
-  ],
-  exports: [
-    CoronavirusComponent
+
   ],
   imports: [
     SharedModule,

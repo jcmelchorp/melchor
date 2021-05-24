@@ -27,7 +27,8 @@
               "core-js",
               "polylabel",
               "xlsx",
-              "@amcharts4"
+              "@amcharts4",
+              "@babel/runtime/helpers/slicedToArray"
             ],
             "outputPath": "dist/melchor",
             "index": "src/index.html",

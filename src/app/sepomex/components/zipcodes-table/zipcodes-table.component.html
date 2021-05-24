@@ -1,0 +1,39 @@
+<mat-table [dataSource]="data" class="full-width-table" aria-label="Elements">
+  <!-- Id Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="d_tipo_asenta">
+    <mat-header-cell *matHeaderCellDef>Tipo de Asentamiento</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.d_tipo_asenta}}</mat-cell>
+  </ng-container>
+
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="d_asenta">
+    <mat-header-cell *matHeaderCellDef>Asentamiento</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.d_asenta}}</mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="d_codigo">
+    <mat-header-cell *matHeaderCellDef>Código Postal</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.d_codigo}}</mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="d_mnpio">
+    <mat-header-cell *matHeaderCellDef>Municipio</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.d_mnpio}}</mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="d_estado">
+    <mat-header-cell *matHeaderCellDef>Estado</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.d_estado}}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

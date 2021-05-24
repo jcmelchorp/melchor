@@ -1,0 +1,46 @@
+<div class="py-5 text-center">
+  <label class="display-4"><span class="catsapp">Cat</span> in motion</label>
+  <p class="mat-h1">Share <span class="catsapp">cats</span> on socials</p>
+</div>
+<div class="py-5 pl-5 pr-5" fxLayoutAlign="center">
+  <div class="card-container" fxLayout="column">
+    <div fxLayoutAlign="space-between center">
+      <div>
+        <button mat-raised-button color="primary" (click)="givemeGif()">Hit me another <span
+            class="catsapp">cat</span>!</button>
+      </div>
+      <div>
+        <a class="pl-3" mat-icon-button href="whatsapp://send?text=https://catsapp.web.app/gif"
+          data-text="Take a look at this awesome website:">
+          <fa-icon [icon]="whatsapp" size="2x"></fa-icon>
+        </a>
+        <a class="pl-3" mat-icon-button href="">
+          <fa-icon [icon]="facebook" size="2x"></fa-icon>
+        </a>
+        <a class="pl-3" mat-icon-button href="">
+          <fa-icon [icon]="twitter" size="2x"></fa-icon>
+        </a>
+        <a class="pl-3" mat-icon-button href="">
+          <fa-icon [icon]="instagram" size="2x"></fa-icon>
+        </a>
+      </div>
+    </div>
+    <mat-card [class.mat-elevation-z8]="true">
+      <mat-card-header>
+        <mat-card-title>{{recip.title}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{recip.title}}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <img mat-card-image src="{{recip.image_url}}">
+      </mat-card-content>
+      <mat-card-footer>
+        <a mat-button [href]="[recip.image_url]" [download]="['catsapp.gif']" target="_self">
+          Download GIF
+        </a>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>

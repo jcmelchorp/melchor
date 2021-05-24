@@ -1,10 +1,9 @@
-<mat-toolbar class="border-bottom">
+<mat-toolbar>
   <mat-toolbar-row fxLayout="row warp" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayoutAlign="start center">
-      <fa-icon *ngIf="isHandset" mat-icon-button [icon]="faBars" (click)="toggleSidenavLeft($event)"
-        aria-label="Side nav toggle icon">
+      <fa-icon *ngIf="isHandset" [icon]="faBars" (click)="toggleSidenavLeft($event)" aria-label="Side nav toggle icon">
       </fa-icon>
-      <app-brand-button class="ml-2"></app-brand-button>
+      <app-brand-button *ngIf="isHandset" class="ml-2"></app-brand-button>
     </div>
     <div fxLayout="row" fxLayoutAlign="end center">
       <button type="button" aria-label="Alternar idioma" mat-icon-button [matMenuTriggerFor]="languageMenu">

@@ -2,13 +2,9 @@
 .sidenav {
   width: fit-content;
   border: none;
-  mat-toolbar {
-    background: inherit;
-  }
 }
 .active {
   color: $success-color;
 }
 .sidenav-container {
-  height: 100%;
 }

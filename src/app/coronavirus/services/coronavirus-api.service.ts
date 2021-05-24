@@ -22,7 +22,7 @@ import { CountryInfo, HistoryData, Summary } from '../models/covid.model';
 export class CoronavirusApiService {
 
   private SERVER_URL: string = environment.coronavirusApi;
-  private COVID19_URL: string = environment.countriesApi;
+  private COVID19_URL: string = environment.covidApi;
   constructor(private _httpClient: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({

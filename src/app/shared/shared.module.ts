@@ -13,6 +13,7 @@ import { appearanceModules } from '../material';
 
 import { sharedComponents } from './components';
 import { sharedServices } from './services';
+import { OnFireComponent } from './components/on-fire/on-fire.component';
 
 export const sharedModules: any[] = [
   CommonModule,
@@ -33,7 +34,7 @@ export const sharedModules: any[] = [
     ...sharedComponents,
     ...appearanceModules,
   ],
-  declarations: [...sharedComponents],
+  declarations: [...sharedComponents, OnFireComponent],
   providers: [...sharedServices]
 })
 export class SharedModule {

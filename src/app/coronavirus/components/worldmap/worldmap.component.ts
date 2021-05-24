@@ -31,6 +31,7 @@ export class WorldmapComponent implements OnInit, AfterViewInit {
     // Themes end
 
 
+
     var populations = {
       "AD": "84000",
       "AE": "4975593",
@@ -429,7 +430,54 @@ export class WorldmapComponent implements OnInit, AfterViewInit {
     // instead of Miller, you can use Mercator or many other projections available: https://www.amcharts.com/demos/map-using-d3-projections/
     mapChart.projection = new am4maps.projections.Miller();
     mapChart.panBehavior = "move";
+    /*mapChart.preloader.disabled = true;
+     let indicator;
+    let indicatorInterval;
+    function showIndicator() {
+      if (!indicator) {
+        indicator = mapChart.tooltipContainer.createChild(am4core.Container);
+        indicator.background.fill = am4core.color("#fff");
+        indicator.background.fillOpacity = 0.8;
+        indicator.width = am4core.percent(100);
+        indicator.height = am4core.percent(100);
+        let indicatorLabel = indicator.createChild(am4core.Label);
+        indicatorLabel.text = "Loading stuff...";
+        indicatorLabel.align = "center";
+        indicatorLabel.valign = "top";
+        indicatorLabel.fontSize = 20;
+        indicatorLabel.dy = 50;
+        let spinner = indicator.createChild(am4core.Image);
+        spinner.href = "assets/images/globe.svg";
+        spinner.align = "center";
+        spinner.valign = "middle";
+        spinner.horizontalCenter = "middle";
+        spinner.verticalCenter = "middle";
+        spinner.scale = 0.7; */
+    /*  setInterval(() => {
+       spinner.animate([{
+         from: 0,
+         to: 360,
+         property: "rotation"
+       }], 2000);
+     }, 3000);
+  }
+   function hideIndicator() {
+    indicator.hide();
+    clearInterval(indicatorInterval);
+  }
+  indicator.hide(0);
+  indicator.show();
 
+  clearInterval(indicatorInterval);
+  indicatorInterval = setInterval(() => {
+    indicator.animate([{
+      from: 0,
+      to: 360,
+      property: "rotation"
+    }], 2000);
+  }, 3000);
+  }
+   showIndicator(); */
     // when map is globe, beackground is made visible
     mapChart.backgroundSeries.mapPolygons.template.polygon.fillOpacity = 0.00;
     mapChart.backgroundSeries.mapPolygons.template.polygon.fill = am4core.color("#bbb");
