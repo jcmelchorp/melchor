@@ -1,9 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #leftSidenav class="sidenav" fixedInViewport="true" [attr.role]="isHandset ? 'dialog' : 'navigation'"
-    [mode]="isHandset ? 'over' : 'side'" [opened]="isHandset === false">
+    [mode]="isHandset ? 'over' : 'side'" [opened]="false">
     <div role="navigation" fxLayout="column" fxLayoutAlign="space-between" fxFlexFill>
       <mat-nav-list>
-        <app-brand-button *ngIf="!isHandset"></app-brand-button>
+        <!-- <app-brand-button *ngIf="!isHandset"></app-brand-button> -->
         <h3 matSubheader>API datasets</h3>
         <mat-list-item [routerLink]="['/crypto']" (click)="isHandset?toggleSidenavLeft($event):null"
           routerLinkActive="active">

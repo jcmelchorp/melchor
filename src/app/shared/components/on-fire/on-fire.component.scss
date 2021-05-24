@@ -8,4 +8,18 @@
   background-repeat: no-repeat;
   background-position: center;
   background-position: 50% 50%;
+  background-size: 120%;
+}
+.view-title {
+  color: whitesmoke;
+  font-size: calc(2rem + 1.5vw);
+  font-weight: 800;
+  font-family: "fredoka one", cursive;
+  text-shadow: -2px -1px 1px gray;
+}
+.view-subtitle {
+  //font-family: "comfortaa";
+  color: darkmagenta;
+  font-size: calc(0.8rem + 1vw);
+  font-weight: 400;
 }
