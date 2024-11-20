@@ -1,0 +1,38 @@
+<p>Validador de códigos postales</p>
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+  <mat-form-field appearance="outline">
+    <mat-label>Estado</mat-label>
+    <mat-select formControlName="state" placeholder="Selecciona un estado (opcional)"
+      (selectionChange)="onSelectState($event.value)">
+      <mat-option *ngFor="let state of states" [value]="state">{{state.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Municipio</mat-label>
+    <mat-select formControlName="municipality" placeholder="Selecciona un municipio (opcional)">
+      <mat-option *ngFor="let municipality of municipalities" [value]="municipality">{{municipality.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="d-block" appearance="outline">
+    <mat-label>Colonia</mat-label>
+    <input matInput formControlName="colony">
+  </mat-form-field>
+  <mat-form-field class="d-block" appearance="outline">
+    <mat-label>C.P.</mat-label>
+    <input matInput #zip_code maxlength="5" placeholder="Código Postal" type="number" formControlName="zip_code">
+    <mat-hint align="end">{{searchForm.controls['zip_code'].value.length}}/5</mat-hint>
+  </mat-form-field>
+  <button mat-raised-button type="submit">Buscar</button>
+
+</form>
+<div *ngIf="(results|async) as results">
+  <app-zipcodes-table [data]="results.zip_codes"></app-zipcodes-table>
+</div>
+<ng-template #spinner>
+  <div class="mat-spinner" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner strokeWidth="8" [diameter]="64" title="Buscando">
+    </mat-spinner>
+    <span>Buscando ...</span><br />
+  </div>
+</ng-template>

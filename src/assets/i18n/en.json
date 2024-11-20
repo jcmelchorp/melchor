@@ -1,5 +1,9 @@
 {
-  "app-name": "Melchor",
+  "app-name": "M",
+  "cat-header-title": "Catch the Cat",
+  "coronavirus-header-title": "Coronavirus MX",
+  "coronavirus-header-description": "Information about pandemic induced by SARS-CoV2 nobel coronavirus",
+  "coronavirus-about-message": "Coronavirus-mx is an independent web application who aims to offers to the public the most relevant information about the pandemic state caused by the Novel Coronavirus and its asociated deseess SARS-CoV2, focused on the country of México.",
   "language-es-name": "Spanish",
   "language-en-name": "English",
   "home": "Home",
@@ -18,5 +22,11 @@
   "settings-header-title": "App Settings",
   "settings-header-description": "Tune this application",
   "theme-header-title": "Lights",
-  "language-header-title": "Language"
+  "language-header-title": "Language",
+  "statistics-module-name": "Statistics",
+  "statistics-current-route-name": "Current data",
+  "statistics-historical-route-name": "Timeline",
+  "modeling-module-name": "SIR Model",
+  "modeling-sirmodel-route-name": "SIR Model",
+  "information-module-name": "Information"
 }

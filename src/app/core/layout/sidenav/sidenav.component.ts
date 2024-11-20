@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 
-import { faCommentDollar, faCommentsDollar } from '@fortawesome/free-solid-svg-icons';
+import { faCat, faCommentDollar, faCommentsDollar, faFlask, faViruses } from '@fortawesome/free-solid-svg-icons';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -15,8 +15,10 @@ import { LayoutService } from '../../services/layout.service';
 export class SidenavComponent implements OnInit {
   @ViewChild('leftSidenav') sidenavLeft: MatSidenav;
   @Input() isHandset: boolean;
+  faFlask = faFlask;
+  faCat = faCat;
   faCommentsDollar = faCommentsDollar;
-
+  faViruses = faViruses;
   constructor(
     private layoutService: LayoutService,
     public translate: TranslateService,
@@ -26,6 +28,8 @@ export class SidenavComponent implements OnInit {
       this.sidenavLeft.toggle();
     });
   }
-
+  toggleSidenavLeft($event: any) {
+    this.layoutService.toggleSidenavLeft.emit($event);
+  }
   ngOnInit() { }
 }

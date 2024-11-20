@@ -1,13 +1,37 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #leftSidenav class="sidenav" fixedInViewport="true" [attr.role]="isHandset ? 'dialog' : 'navigation'"
-    [mode]="isHandset ? 'over' : 'side'" [opened]="isHandset === false">
+    [mode]="isHandset ? 'over' : 'side'" [opened]="false">
     <div role="navigation" fxLayout="column" fxLayoutAlign="space-between" fxFlexFill>
       <mat-nav-list>
-        <app-brand-button></app-brand-button>
-        <h3 matSubheader>Shared Components </h3>
-        <mat-list-item [routerLink]="['crypto']" routerLinkActive="active">
-          <fa-icon matListIcon [icon]="faCommentsDollar"></fa-icon>
+        <!-- <app-brand-button *ngIf="!isHandset"></app-brand-button> -->
+        <h3 matSubheader>API datasets</h3>
+        <mat-list-item [routerLink]="['/crypto']" (click)="isHandset?toggleSidenavLeft($event):null"
+          routerLinkActive="active">
+          <mat-icon matListIcon>price_change</mat-icon>
           <span matLine>Cryptocurrencies</span>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/coronavirus']" (click)="isHandset?toggleSidenavLeft($event):null"
+          routerLinkActive="active">
+          <mat-icon matListIcon>coronavirus</mat-icon>
+          <span matLine>Coronavirus</span>
+        </mat-list-item>
+        <mat-list-item [routerLink]="['/sepomex']" (click)="isHandset?toggleSidenavLeft($event):null"
+          routerLinkActive="active">
+          <mat-icon matListIcon>markunread_mailbox</mat-icon>
+          <span matLine>Servicio Postal Mexicano</span>
+        </mat-list-item>
+
+        <h3 matSubheader>Science</h3>
+        <mat-list-item [routerLink]="['/periodic-table']" (click)="isHandset?toggleSidenavLeft($event):null"
+          routerLinkActive="active">
+          <mat-icon matListIcon>science</mat-icon>
+          <span matLine>Periodic Table</span>
+        </mat-list-item>
+        <h3 matSubheader>Games</h3>
+        <mat-list-item [routerLink]="['/catsapp']" (click)="isHandset?toggleSidenavLeft($event):null"
+          routerLinkActive="active">
+          <fa-icon [icon]="faCat" matListIcon>cat</fa-icon>
+          <span matLine>CatsApp</span>
         </mat-list-item>
         <!--   -->
       </mat-nav-list>
@@ -19,11 +43,8 @@
         </mat-list-item>
       </mat-nav-list>
     </div>
-
   </mat-sidenav>
-  <mat-sidenav-content class="sidenav-content">
-    <app-main-content>
-      <app-breadcrumb></app-breadcrumb>
-    </app-main-content>
+  <mat-sidenav-content>
+    <app-main-content> </app-main-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

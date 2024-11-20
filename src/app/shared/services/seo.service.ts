@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { filter, map } from 'rxjs/operators';
 
-import { SnackComponent } from '../components/snack/snack.component';
+import { AlertComponent } from './../components/alert/alert.component';
 
 @Injectable({
   providedIn: 'root',
@@ -55,7 +55,7 @@ export class SeoService {
     this.titleService.setTitle(title);
     this.metaService.addTags([
       {
-        name: 'keywords', content: 'escuela RDS Escuela Rafael Diaz Serdan educacion alumnos veracruz pierre faure montesory'
+        name: 'keywords', content: 'Personal website'
       },
       { name: 'description', content: description },
       { name: 'robots', content: 'index, follow' },
@@ -82,7 +82,7 @@ export class SeoService {
        { property: 'profile:username', content: 'jcmelchorp' },
        { property: 'profile:gender', content: 'male' }, */
       { property: 'og:site_name', content: title },
-      { property: 'og:url', content: 'http://rds.edu.mx' },
+      { property: 'og:url', content: 'https://melchor.web.app' },
       { property: 'og:image:url', content: image },
       { property: 'og:image:secure_url', content: image, },
       { property: 'og:image:alt', content: 'Website view example' },
@@ -97,7 +97,7 @@ export class SeoService {
         this.snackBar.open(
           'Se han hecho cambios desde la última visita. Actualiza la página para continuar'
         );
-        const alert = await this.dialog.open(SnackComponent, {
+        const alert = this.dialog.open(AlertComponent, {
           data: {
             header: `This app has been updated!`,
             message: `Newer version of the app is available. It's a quick refresh away!`

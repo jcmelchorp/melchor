@@ -1,0 +1,88 @@
+<div class="card" *ngIf="country">
+  <mat-list class="card-header">
+    <mat-list-item>
+      <img matListAvatar src="assets/flags/{{(country.id)?(country.id|lowercase):'all'}}.svg" alt="{{country.name}}">
+      <ng-content matLine></ng-content>
+      <!--       <button mat-raised-button [routerLink]="[country.id]"></button>
+ --> <small class="text-muted" fxLayout="column" fxLayoutAlign="center start">
+        <div fxFlex> Población: {{country.population|number}} hab.</div>
+        <div fxFlex *ngIf="country.area">Superficie: {{country.area|number}} km²</div>
+        <div fxFlex *ngIf="country.life_expectancy">Esperanza de vida: {{country.life_expectancy|number}} años</div>
+      </small>
+
+    </mat-list-item>
+  </mat-list>
+  <div class="card-body p-2" fxLayout="row wrap">
+    <!--  <div *ngFor="let case of cases" fxLayout="row wrap">
+      <app-case-card *ngIf="cases" [data]="case"></app-case-card>
+    </div> -->
+
+    <mat-card class="mat-elevation-z0" fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%">
+      <mat-card-header>
+        <fa-icon matCardAvatar class="text-warning fa-icon" size="2x" [icon]="faHeadSideVirus"></fa-icon>
+        <mat-card-title>
+          {{country.confirmed|number}}
+          <small class="text-warning">{{country.confirmed/country.population|percent:'.2'}}</small>
+        </mat-card-title>
+        <mat-card-subtitle> Confirmados </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card class="mat-elevation-z0" fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%">
+      <mat-card-header>
+        <fa-icon matCardAvatar class="text-danger fa-icon" size="2x" [icon]="faSkullCrossbones"></fa-icon>
+        <mat-card-title>
+          {{country.deaths|number}}&nbsp;
+          <small class="text-danger">{{country.deaths/country.population|percent:'.2'}}</small>
+        </mat-card-title>
+        <mat-card-subtitle> Muertes </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+    <mat-card class="mat-elevation-z0" fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%">
+      <mat-card-header>
+        <fa-icon matCardAvatar class="text-success fa-icon" size="2x" [icon]="faHeadSideMask"></fa-icon>
+        <mat-card-title>
+          {{country.recovered|number}}&nbsp;
+          <small class="text-success">{{country.recovered/country.population|percent:'.2'}}</small>
+        </mat-card-title>
+        <mat-card-subtitle>Recuperados</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+    <mat-card class="mat-elevation-z0" fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%">
+      <mat-card-header>
+        <fa-icon matCardAvatar class="text-secondary fa-icon" size="2x" [icon]="faHandHoldingMedical"></fa-icon>
+        <mat-card-title>
+          {{country.administered|number}}
+          &nbsp; <small class="text-secondary">{{country.administered/country.population|percent:'.2'}}</small>
+        </mat-card-title>
+        <mat-card-subtitle>Dosis Administradas </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card class="mat-elevation-z0" fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%">
+      <mat-card-header>
+        <fa-icon matCardAvatar class="text-info" size="2x" [icon]="faSyringe"></fa-icon>
+        <mat-card-title>
+          {{country.p_vaccinated|number}}&nbsp;
+          <small class="text-info">{{country.p_vaccinated/country.population|percent:'.2'}}</small>
+        </mat-card-title>
+        <mat-card-subtitle>Parcialmente vacunados</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+    <mat-card class="mat-elevation-z0" fxFlex="0 1 calc(33.3%)" fxFlex.lt-md="0 1 calc(50%)" fxFlex.lt-sm="100%">
+      <mat-card-header>
+        <fa-icon matCardAvatar class="text-primary" size="2x" [icon]="faFirstAid"></fa-icon>
+        <mat-card-title>
+          {{country.vaccinated|number}}&nbsp;
+          <small class="text-primary">{{country.vaccinated/country.population|percent:'.2'}}</small>
+        </mat-card-title>
+        <mat-card-subtitle>Vacunados</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+  <div class="p-1 card-footer text-center">
+    <span class="text-muted">
+      Última actualización: {{country.date|date}}
+    </span>
+  </div>
+</div>

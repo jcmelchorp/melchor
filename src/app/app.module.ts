@@ -7,6 +7,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { CarouselModule } from "ngx-bootstrap/carousel";
+
 import { ChartsModule } from 'ng2-charts';
 
 import { environment } from '../environments/environment';
@@ -18,13 +20,14 @@ import { appearanceModules } from './material';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppStoreModule } from './store/app-store.module';
+import { OverlayContainer } from '@angular/cdk/overlay';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +37,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     SharedModule.forRoot(),
     CoreModule,
-    ChartsModule,
+    CarouselModule.forRoot(),
     TranslateModule.forRoot({
-      defaultLanguage: 'en',
+      defaultLanguage: 'es',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
@@ -48,4 +51,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(overlayContainer: OverlayContainer) {
+    overlayContainer.getContainerElement().classList.add('dark-theme');
+
+  }
+}

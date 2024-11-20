@@ -19,7 +19,7 @@ export class LayoutComponent implements OnInit {
   constructor(
     private themeService: ThemeService,
     private layoutService: LayoutService,
-    private overlay: OverlayContainer,
+    /* private overlay: OverlayContainer, */
     private router: Router
   ) {
     this.router.events.subscribe((event: RouterEvent) => {
@@ -28,13 +28,13 @@ export class LayoutComponent implements OnInit {
   }
   ngOnInit(): void {
     this.isDarkTheme = this.themeService.isDarkTheme;
-    this.isDarkTheme.subscribe(isDark => {
-      if (isDark) {
-        this.overlay.getContainerElement().classList.add('dark-theme');
-      } else {
-        this.overlay.getContainerElement().classList.remove('dark-theme');
-      }
-    });
+    /*  this.isDarkTheme.subscribe(isDark => {
+       if (isDark) {
+         this.overlay.getContainerElement().classList.add('dark-theme');
+       } else {
+         this.overlay.getContainerElement().classList.remove('dark-theme');
+       }
+     });*/
     this.isHandset$ = this.layoutService.isHandset$;
   }
 

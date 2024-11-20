@@ -1,5 +1,5 @@
 @import "~@angular/material/theming";
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa&family=Roboto&family=Fredoka+One&family=Love+Ya+Like+A+Sister&family=Sarabun&family=Londrina+Shadow&family=Londrina+Sketch&family=Miltonian&family=Modak&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&family=Roboto&family=Love+Ya+Like+A+Sister&family=Fredoka+One&family=Love+Ya+Like+A+Sister&family=Sarabun&family=Londrina+Shadow&family=Londrina+Sketch&family=Miltonian&family=Modak&family=Pangolin&family=Righteous&family=Ubuntu+Condensed&display=swap");
 /* .active {
   @include mat-elevation-transition;
   @include mat-elevation(2);
@@ -21,17 +21,32 @@ $light-accent: mat-palette($mat-brown, A200, A400, A900);
 // The warn palette is optional (defaults to red).
 $light-warn: mat-palette($mat-deep-orange);
 // Create the theme object (a Sass map containing all of the palettes).
-$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+$light-theme: mat-light-theme(
+  (
+    color: (
+      primary: $light-primary,
+      accent: $light-accent,
+      warn: $light-warn,
+    ),
+  )
+);
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($light-theme);
 // Define an alternate dark theme.
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent: mat-palette($mat-gray, A400, A100, A700);
+$dark-warn: mat-palette($mat-red);
+$dark-theme: mat-dark-theme(
+  (
+    color: (
+      primary: $dark-primary,
+      accent: $dark-accent,
+      warn: $dark-warn,
+    ),
+  )
+);
 .dark-theme {
-  color: $light-primary-text;
-  $dark-primary: mat-palette($mat-blue-grey);
-  $dark-accent: mat-palette($mat-gray, A400, A100, A700);
-  $dark-warn: mat-palette($mat-red);
-  $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
-  @include angular-material-theme($dark-theme);
+  @include angular-material-color($dark-theme);
 }
